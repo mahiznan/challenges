@@ -60,7 +60,6 @@ class Tree {
 
 public class BinaryTree {
 
-
     static void printTree(Tree tree) {
         System.out.print(tree.getValue());
         if (tree.hasLeftChild()) {
