@@ -27,7 +27,6 @@ Expected Space Complexity: O(k)
 Constraints:
 1 ≤ numerator, denominator ≤ 2000
 */
-
 package com.mahiznan.challenges;
 
 import java.util.HashMap;
@@ -69,6 +68,10 @@ public class SimpleFraction {
     }
 
     public static void main(String[] args) {
-        System.out.println(fractionToDecimal(16, 13));
+        int numerator = 11;
+        int denominator = 18;
+//        int numerator = 2;
+//        int denominator = 3;
+        System.out.println(fractionToDecimal(numerator, denominator));
     }
 }

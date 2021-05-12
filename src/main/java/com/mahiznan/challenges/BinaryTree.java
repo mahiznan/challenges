@@ -1,5 +1,23 @@
+/*
+You need to construct a binary tree from a string consisting of parenthesis and integers.
+
+The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis. The integer represents the root’s value and a pair of parenthesis contains a child binary tree with the same structure.
+
+You always start to construct the left child node of the parent first if it exists.
+
+Input: s = "4(2(3)(1))(6(5))"
+Output:
+     4
+   /    \
+  2      6
+ / \    /
+3   1   5
+*/
+
 package com.mahiznan.challenges;
 
+
+import java.util.Stack;
 
 class Tree {
     private final int value;
@@ -91,36 +109,50 @@ public class BinaryTree {
 //        printTree(n1);
 
 
-//        String s = "1(2(4(8)(9))(5(10)(11)))(3(6(12)(13))(7(14)(15)))";
-        String s = "1(2)(3)";
-        char[] str = s.toCharArray();
-        Tree t1 = new Tree(Integer.parseInt(String.valueOf(str[0])));
-        constructTree(str, true, 1, t1);
+        String s = "1(2(4(8)(9))(5(10)(11)))(3(6(12)(13))(7(14)(15)))";
+//        String s = "1(2)(3)";
+        Tree t = constructTree(s, 0, s.length() - 1);
+        if (t != null) {
+            printTree(t);
+        }
 
     }
 
-    private static void constructTree(char[] s, boolean isLeftTravel, int pos, Tree t) {
+    private static int findIndex(String s, int startIndex, int endIndex) {
+        if (startIndex > endIndex)
+            return -1;
 
-        //TODO: Tree construction is not working fine; Need to fix.
-        printTree(t);
-
-        if (pos == s.length) {
-            printTree(t);
-            return;
-        }
-        if (s[pos] == '(') {
-            constructTree(s, true, pos + 1, t);
-        }
-        if (s[pos] == ')') {
-            constructTree(s, false, pos + 1, t);
-        }
-        if (s[pos] != '(' && s[pos] != ')') {
-            Tree child = new Tree(Integer.parseInt(String.valueOf(s[pos])));
-            if (isLeftTravel) {
-                t.setLeftChild(child);
-            } else {
-                t.setRightChild(child);
+        Stack<Character> stack = new Stack<>();
+        for (int i = startIndex; i <= endIndex; i++) {
+            if (s.charAt(i) == '(')
+                stack.push(s.charAt(i));
+            if (s.charAt(i) == ')') {
+                stack.pop();
+                if (stack.isEmpty())
+                    return i;
             }
         }
+        return -1;
+    }
+
+    private static Tree constructTree(String s, int startIndex, int endIndex) {
+        if (startIndex > endIndex)
+            return null;
+        int q = startIndex + 1;
+        while (s.charAt(q) != '(' && s.charAt(q) != ')') {
+            q++;
+        }
+        String v = s.substring(startIndex, q);
+        Tree tree = new Tree(Integer.parseInt(v));
+        int index = -1;
+        if (startIndex + 1 <= endIndex && s.charAt(startIndex + 1) == '(') {
+            index = findIndex(s, startIndex + 1, endIndex);
+        }
+
+        if (index != -1) {
+            tree.setLeftChild(constructTree(s, startIndex + 2, index - 1));
+            tree.setRightChild(constructTree(s, index + 2, endIndex - 1));
+        }
+        return tree;
     }
 }
