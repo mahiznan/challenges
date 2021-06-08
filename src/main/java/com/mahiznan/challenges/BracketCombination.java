@@ -1,5 +1,22 @@
 package com.mahiznan.challenges;
 
+
+/*
+In how many ways valid parenthesis can be formed for the given number
+Example 1:
+For 2 it can be formed in 2 ways
+{{}}
+{}{}
+
+Example 1:
+For 3 it can be formed in 5 ways
+{{{}}}
+{{}{}}
+{{}}{}
+{}{{}}
+{}{}{}
+
+ */
 class BracketCombination {
 
     /*
@@ -35,8 +52,8 @@ class BracketCombination {
     public static void main(String[] args) {
 //        Scanner s = new Scanner(System.in);
 //        System.out.print(calculateBalancedParanthesis(s.nextInt()));
-        System.out.print(calculateBalancedParenthesis(6));
-//        calculateBalancedParanthesis(2);
+//        System.out.print(calculateBalancedParenthesis(6));
+        System.out.println(calculateBalancedParenthesis(3));
     }
 
     private static int calculateBalancedParenthesis(int n) {
@@ -48,6 +65,7 @@ class BracketCombination {
 
     private static int printBalancedParenthesis(char[] str, int n, int position, int open, int close, int res) {
         if (close == n) {
+            System.out.println(str);
             return res + 1;
         } else {
             if (open < n) {
