@@ -1,10 +1,9 @@
 package com.mahiznan.challenges;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class ReverseLinkedList {
-    static void printList(Node node) {
+    static void printList(LinkedListNode node) {
         while (node != null) {
             System.out.print(node.data + " ");
             node = node.next;
@@ -12,12 +11,12 @@ public class ReverseLinkedList {
         System.out.println();
     }
 
-    static Node reverseListRecursion(Node head) {
+    static LinkedListNode reverseListRecursion(LinkedListNode head) {
         if (head.next == null) {
             System.out.println("Next head is null for " + head.data);
             return head;
         }
-        Node newHead = reverseListRecursion(head.next);
+        LinkedListNode newHead = reverseListRecursion(head.next);
         System.out.println("head is " + head.data);
         head.next.next = head;
         head.next = null;
@@ -26,15 +25,15 @@ public class ReverseLinkedList {
     }
 
     //{10, 9, 8, 7, 2};
-    static Node reverseList(Node head) {
+    static LinkedListNode reverseList(LinkedListNode head) {
         if (head.next == null) {
             return head;
         }
-        Node tail = new Node(head.data);
-        Node cNode = head.next;
-        Node tHead = null;
+        LinkedListNode tail = new LinkedListNode(head.data);
+        LinkedListNode cNode = head.next;
+        LinkedListNode tHead = null;
         while (cNode != null) {
-            tHead = new Node(cNode.data);
+            tHead = new LinkedListNode(cNode.data);
             tHead.next = tail;
             tail = tHead;
             cNode = cNode.next;
@@ -48,10 +47,10 @@ public class ReverseLinkedList {
         int[] arr = {10, 9, 8, 7, 2};
 //        int n = 1;
 //        int[] arr = {11};
-        Node head = new Node(arr[0]);
-        Node tail = head;
+        LinkedListNode head = new LinkedListNode(arr[0]);
+        LinkedListNode tail = head;
         for (int i = 1; i < n; i++) {
-            tail.next = new Node(arr[i]);
+            tail.next = new LinkedListNode(arr[i]);
             tail = tail.next;
         }
         //reverseList(head);
@@ -59,11 +58,11 @@ public class ReverseLinkedList {
     }
 }
 
-class Node {
+class LinkedListNode {
     int data;
-    Node next;
+    LinkedListNode next;
 
-    Node(int x) {
+    LinkedListNode(int x) {
         data = x;
         next = null;
     }
