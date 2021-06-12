@@ -1,7 +1,6 @@
 package com.mahiznan.challenges;
 
-// Java program to find intersection
-// rectangle of given two rectangles.
+// Java program to find intersection rectangle of given two rectangles.
 public class IntersectingRectangle {
 
     // function to find intersection

@@ -1,7 +1,9 @@
 package com.mahiznan.challenges.core;
 
-import java.util.concurrent.*;
+class Test{}
 
+//import java.util.concurrent.*;
+/*
 //Will take Resource as  shared class
 class Resource {
     static int count = 0;
@@ -107,3 +109,4 @@ public class SemTest {
         System.out.println("count: " + Resource.count);
     }
 }
+*/

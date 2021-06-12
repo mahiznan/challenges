@@ -60,6 +60,23 @@ class Tree {
 
 public class BinaryTree {
 
+
+    static void printTreeTest(Tree tree) {
+        System.out.print(tree.getValue());
+        if (tree.hasLeftChild()) {
+            System.out.print("(");
+            printTreeTest(tree.getLeftChild());
+            System.out.print(")");
+        }
+        if (tree.hasRightChild()) {
+            System.out.print("(");
+            printTreeTest(tree.getRightChild());
+            System.out.print(")");
+        }
+
+    }
+
+
     static void printTree(Tree tree) {
         System.out.print(tree.getValue());
         if (tree.hasLeftChild()) {
@@ -106,13 +123,16 @@ public class BinaryTree {
         Tree n15 = new Tree(15);
         n7.setLeftChild(n14);
         n7.setRightChild(n15);
-//        printTree(n1);
+        printTreeTest(n1);
+        System.out.println("");
 
 
         String s = "1(2(4(8)(9))(5(10)(11)))(3(6(12)(13))(7(14)(15)))";
 //        String s = "1(2)(3)";
         Tree t = constructTree(s, 0, s.length() - 1);
         if (t != null) {
+            printTreeTest(t);
+            System.out.println("");
             printTree(t);
         }
 
@@ -143,6 +163,7 @@ public class BinaryTree {
             q++;
         }
         String v = s.substring(startIndex, q);
+        System.out.println("V is " + v);
         Tree tree = new Tree(Integer.parseInt(v));
         int index = -1;
         if (startIndex + 1 <= endIndex && s.charAt(startIndex + 1) == '(') {

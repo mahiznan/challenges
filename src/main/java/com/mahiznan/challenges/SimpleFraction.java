@@ -59,6 +59,7 @@ public class SimpleFraction {
                     String part2 = "(" + result.substring(index) + ")";
                     return part1 + part2;
                 }
+                System.out.println("Putting " + r + "=>" + result.length() + " in to the map");
                 map.put(r, result.length());
                 result.append(r / denominator);
                 r = r % denominator * 10;
@@ -68,10 +69,10 @@ public class SimpleFraction {
     }
 
     public static void main(String[] args) {
-        int numerator = 11;
-        int denominator = 18;
-//        int numerator = 2;
-//        int denominator = 3;
+//        int numerator = 11;
+//        int denominator = 18;
+        int numerator = 2;
+        int denominator = 3;
         System.out.println(fractionToDecimal(numerator, denominator));
     }
 }

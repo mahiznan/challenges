@@ -30,6 +30,9 @@ public class BeybladeChampionship {
         }
     }
 
+
+
+
     private static int beybladeChampionship(int n, int[] teamA, int[] teamB) {
         Arrays.sort(teamA);
         Arrays.sort(teamB);

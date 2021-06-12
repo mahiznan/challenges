@@ -46,12 +46,15 @@ package com.mahiznan.challenges;
 public class ReachNthStair {
 
     static int climb(int possibleWays, int walkedSteps, int remainingSteps) {
+        if (remainingSteps == 0)
+            return possibleWays;
         if (remainingSteps >= 1) {
-            possibleWays = climb(possibleWays, walkedSteps + 1, remainingSteps - 1);
+            possibleWays = climb(possibleWays + 1, walkedSteps + 1, remainingSteps - 1);
         }
         if (remainingSteps >= 2) {
-            possibleWays = climb(possibleWays, walkedSteps + 2, remainingSteps - 2);
+            possibleWays = climb(possibleWays + 1, walkedSteps + 2, remainingSteps - 2);
         }
+        System.out.println("Possible ways " + possibleWays);
         return possibleWays;
     }
 
@@ -60,7 +63,7 @@ public class ReachNthStair {
     }
 
     public static void main(String[] args) {
-        int n = 10;
+        int n = 4;
         System.out.println(countWays(n));
     }
 }

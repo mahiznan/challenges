@@ -6,16 +6,16 @@ import java.util.Collections;
 public class LeadersInArray {
 
     static ArrayList<Integer> leaders(int arr[], int n) {
-        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<Integer> leaders = new ArrayList<>();
         int currentLeader = arr[n - 1];
         for (int i = n - 1; i >= 0; i--) {
             if (arr[i] >= currentLeader) {
-                res.add( arr[i]);
+                leaders.add( arr[i]);
                 currentLeader = arr[i];
             }
         }
-       Collections.reverse(res);
-        return res;
+       Collections.reverse(leaders);
+        return leaders;
     }
 
     public static void main(String[] args) {
