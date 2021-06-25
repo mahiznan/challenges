@@ -5,7 +5,7 @@ public class IntersectingRectangle {
 
     // function to find intersection
 // rectangle of given two rectangles.
-    static void FindPoints(int x1, int y1,
+    static void findPoints(int x1, int y1,
                            int x2, int y2,
                            int x3, int y3,
                            int x4, int y4) {
@@ -61,7 +61,7 @@ public class IntersectingRectangle {
                 x4 = 7, y4 = 9;
 
         // function call
-        FindPoints(x1, y1, x2, y2,
+        findPoints(x1, y1, x2, y2,
                 x3, y3, x4, y4);
     }
 }

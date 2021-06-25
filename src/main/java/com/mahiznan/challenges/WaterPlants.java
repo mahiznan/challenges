@@ -53,91 +53,120 @@ gallery[i] ≤ 50
  */
 
 
-// C++ program for the above approach
-
-/*
-
-int minSprinklers(int arr[], int N)
-        {
-        // Stores the leftmost and rightmost
-        // point of every sprinklers
-        vector<pair<int, int> > V;
-        // Traverse the array arr[]
-        for (int i = 0; i < N; i++) {
-        if (arr[i] > -1) {
-        V.push_back(
-        pair<int, int>(i - arr[i], i + arr[i]));
-        }
-        }
-        // Sort the array sprinklers in
-        // ascending order by first element
-        sort(V.begin(), V.end());
-
-        // Stores the rightmost range
-        // of a sprinkler
-        int maxRight = 0;
-        // Stores minimum sprinklers
-        // to be turned on
-        int res = 0;
-
-        int i = 0;
-
-        // Iterate until maxRight is
-        // less than N
-        while (maxRight < N) {
-
-        // If i is equal to V.size()
-        // or V[i].first is greater
-        // than maxRight
-
-        if (i == V.size() || V[i].first > maxRight) {
-        return -1;
-        }
-        // Stores the rightmost boundary
-        // of current sprinkler
-        int currMax = V[i].second;
-
-        // Iterate until i+1 is less
-        // than V.size() and V[i+1].first
-        // is less than or equal to maxRight
-        while (i + 1 < V.size()
-        && V[i + 1].first <= maxRight) {
-
-        // Increment i by 1
-        i++;
-        // Update currMax
-        currMax = max(currMax, V[i].second);
-        }
-
-        // If currMax is less than the maxRight
-        if (currMax < maxRight) {
-        // Return -1
-        return -1;
-        }
-        // Increment res by 1
-        res++;
-
-        // Update maxRight
-        maxRight = currMax + 1;
-
-        // Increment i by 1
-        i++;
-        }
-        // Return res as answer
-        return res;
-        }
-
- */
-
-
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class WaterPlants {
     static int min_sprinklers(int[] gallery, int n) {
-        return -1;
+
+        //2, 3, 4, -1, 0, 0, 0, 0, 0
+
+        List<List<Integer>> sprinklers = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            if (gallery[i] != -1) {
+                row.add(Math.max(0, i - gallery[i]));
+                row.add(Math.min(i + gallery[i], n - 1));
+                sprinklers.add(row);
+            }
+        }
+
+        /*for (List<Integer> row : sprinklers) {
+            for (Integer i : row) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }*/
+//        sprinklers.sort( (l1, l2) -> l1.get(0).compareTo( l2.get(0) ) );
+
+        sprinklers.sort(Comparator.comparing(l -> l.get(0)));
+/*
+        System.out.println("After");
+        for (List<Integer> row : sprinklers) {
+            for (Integer i : row) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }*/
+
+
+        int curr = 0, ON = 0, i = 0;
+        // i = No Of Sprinklers Used
+        //curr = Current range
+        int maxRange = 0;
+        //System.out.println("No of sprinklers " + sprinklers.size());
+        // 2, 3, 4, -1, 0, 0, 0, 0, 0
+        while (curr < n) {
+            if (sprinklers.size() <= i || curr < sprinklers.get(i).get(0))
+                return -1;
+            maxRange = sprinklers.get(i).get(1);
+            while (i < sprinklers.size() - 1 && sprinklers.get(i + 1).get(0) <= curr) {
+                ++i;
+                maxRange = Math.max(sprinklers.get(i).get(1), maxRange);
+                //System.out.println("Max Range is " + maxRange + " for " + sprinklers.get(i) + " at i " + i);
+            }
+            if (maxRange < curr)
+                return -1;
+            ++ON;
+            ++i;
+            curr = maxRange + 1;
+        }
+        return ON;
+
     }
+
+    static int getMinSprinklers(int[] range, int n) {
+
+        //-1, 2, 2, -1, 0, 0
+        int sprinklersCount = 0;
+        List<List<Integer>> sprinklers = new ArrayList<>();
+        for (int i = 0; i < range.length; i++) {
+            if (range[i] != -1) {
+                List<Integer> row = new ArrayList<>();
+                row.add(Math.max(0, i - range[i]));
+                row.add(Math.min(i + range[i], n - 1));
+                sprinklers.add(row);
+            }
+        }
+
+        //-1, 2, 2, -1, 0, 0
+
+        /*for (List<Integer> row : sprinklers) {
+            for (Integer i : row) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }*/
+
+        sprinklers.sort((o1, o2) -> Integer.compare(o1.get(0), o2.get(0)));
+
+
+        int curr = 0, i = 0, maxRange;
+        while (curr < n) {
+            if (i >= sprinklers.size() || sprinklers.get(i).get(0) > curr)
+                return -1;
+            maxRange = sprinklers.get(i).get(1);
+            while (i < sprinklers.size() - 1 && sprinklers.get(i + 1).get(0) <= curr) {
+                i++;
+                maxRange = Math.max(sprinklers.get(i).get(1), maxRange);
+            }
+            if (maxRange < curr)
+                return -1;
+            i++;
+            sprinklersCount++;
+            curr = maxRange + 1;
+        }
+        return sprinklersCount;
+
+    }
+
 
     public static void main(String[] args) {
         int[] gallery = {-1, 2, 2, -1, 0, 0};
+//        int[] gallery = {2, 3, 4, -1, 2, 0, 0, -1, 0};
+//        int[] gallery = {2, 3, 4, -1, 0, 0, 0, 0, 0};
         System.out.println(min_sprinklers(gallery, gallery.length));
+        System.out.println(getMinSprinklers(gallery, gallery.length));
     }
 }

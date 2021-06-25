@@ -158,16 +158,18 @@ public class BinaryTree {
     private static Tree constructTree(String s, int startIndex, int endIndex) {
         if (startIndex > endIndex)
             return null;
+        //Extract the value
         int q = startIndex + 1;
         while (s.charAt(q) != '(' && s.charAt(q) != ')') {
             q++;
         }
-        String v = s.substring(startIndex, q);
-        System.out.println("V is " + v);
-        Tree tree = new Tree(Integer.parseInt(v));
+        String value = s.substring(startIndex, q);
+        System.out.println("V is " + value);
+        Tree tree = new Tree(Integer.parseInt(value));
         int index = -1;
         if (startIndex + 1 <= endIndex && s.charAt(startIndex + 1) == '(') {
             index = findIndex(s, startIndex + 1, endIndex);
+            System.out.println("Index value is " + index);
         }
 
         if (index != -1) {

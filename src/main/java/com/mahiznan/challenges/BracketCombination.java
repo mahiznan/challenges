@@ -25,7 +25,7 @@ class BracketCombination {
     public static void main(String[] args) {
 //        Scanner s = new Scanner(System.in);
 //        System.out.print(calculateBalancedParanthesis(s.nextInt()));
-        int n = 3;
+        int n = 2;
         System.out.println(calculateBalancedParenthesis(n));
     }
 

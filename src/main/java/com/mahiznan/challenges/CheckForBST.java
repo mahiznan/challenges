@@ -11,16 +11,6 @@ import java.util.Queue;
 
 class CheckForBST {
 
-    static boolean checkBalanceTree(Node root, int v, boolean leftTravel) {
-        if (root == null)
-            return true;
-        if ((leftTravel && root.data >= v) || (!leftTravel && root.data <= v))
-            return false;
-        if (checkBalanceTree(root.left, root.data, true))
-            return checkBalanceTree(root.right, root.data, false);
-        return false;
-    }
-
 
     static boolean isBST(Node root) {
         if (root.left == null || root.right == null)
@@ -117,11 +107,12 @@ class CheckForBST {
 //        String s = "2 7 6 5 9 2 6";
         String s = "2 N 7 N 6 N 5 N 9 N 2 N 6";
         Node root = buildTree(s);
-        printInorder(root);
+        //printInorder(root);
+        assert root != null;
         if (isBST(root))
-            System.out.println(1);
+            System.out.println("Balanced Tree");
         else
-            System.out.println(0);
+            System.out.println("Unbalanced Tree");
 
 
     }
