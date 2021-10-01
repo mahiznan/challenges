@@ -162,11 +162,43 @@ public class WaterPlants {
     }
 
 
+    static int minSprinklersPractice(int[] gallery, int n) {
+        List<List<Integer>> sprinklers = new ArrayList<>();
+
+        for (int i = 0; i < gallery.length; i++) {
+            List<Integer> row = new ArrayList<>();
+            row.add(Math.max(0, i - gallery[i]));
+            row.add(Math.min(i + gallery[i], n - 1));
+            sprinklers.add(row);
+        }
+        int ON = 0, currPosition = 0, i = 0, maxRange = 0;
+
+        sprinklers.sort(Comparator.comparingInt(o -> o.get(0)));
+        while (currPosition < n) {
+            if (i >= sprinklers.size() || sprinklers.get(i).get(0) > currPosition)
+                return -1;
+            maxRange = sprinklers.get(i).get(1);
+            while (i < sprinklers.size() - 1 && sprinklers.get(i + 1).get(0) <= currPosition) {
+                i++;
+                maxRange = Math.max(maxRange, sprinklers.get(i).get(1));
+            }
+            if (maxRange < currPosition)
+                return -1;
+            i++;
+            ON++;
+            currPosition = maxRange + 1;
+        }
+
+        return ON;
+    }
+
+
     public static void main(String[] args) {
         int[] gallery = {-1, 2, 2, -1, 0, 0};
 //        int[] gallery = {2, 3, 4, -1, 2, 0, 0, -1, 0};
 //        int[] gallery = {2, 3, 4, -1, 0, 0, 0, 0, 0};
         System.out.println(min_sprinklers(gallery, gallery.length));
         System.out.println(getMinSprinklers(gallery, gallery.length));
+        System.out.println(minSprinklersPractice(gallery, gallery.length));
     }
 }

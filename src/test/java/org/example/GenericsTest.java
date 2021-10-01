@@ -106,7 +106,6 @@ public class GenericsTest {
         stringList.add("custom String");
         A a = new B();
         a.action();
-
     }
 
 
