@@ -7,6 +7,8 @@ public class InfixToPostfix {
 
 
     public static String infixToPostfix(String exp) {
+        System.out.println("Expression " + exp);
+
         Deque<String> stack = new ArrayDeque<>();
         StringBuilder result = new StringBuilder();
         String ops = "-+/*^()";
