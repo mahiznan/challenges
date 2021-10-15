@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class FuncInterfaceTest {
 
@@ -18,9 +19,10 @@ public class FuncInterfaceTest {
             System.out.println(v);
             return "Hi " + v;
         });
-
         employees.forEach((integer, s) -> System.out.println(s));
 
+        Function<Integer, Integer> f = (o) -> o + 1;
+        System.out.println(f.apply(100));
     }
 
     @Test
