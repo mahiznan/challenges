@@ -1,6 +1,6 @@
 package com.mahiznan.challenges;
 
-public class SubsetSum {
+public class SubsetSumDP {
 
     //Approach 1, Recursive approach
     static boolean isSubsetSum(int[] set,
@@ -16,6 +16,8 @@ public class SubsetSum {
         return isSubsetSum(set, n - 1, sum) || isSubsetSum(set, n - 1, sum - set[n - 1]);
     }
 
+
+    //Approach 2, Dynamic Programming
     static boolean canFormSubset(int[] set,
                                  int n, int sum) {
         boolean[][] subset = new boolean[sum + 1][n + 1];
