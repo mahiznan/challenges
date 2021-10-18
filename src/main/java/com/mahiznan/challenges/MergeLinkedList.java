@@ -5,18 +5,40 @@ public class MergeLinkedList {
     public static LinkedListNode merge_sorted(
             LinkedListNode head1,
             LinkedListNode head2) {
+        LinkedListNode mergedHead, mergedTail;
+        if (head1 == null) {
+            return head2;
+        }
+        if (head2 == null) {
+            return head1;
+        }
 
-        while (head1 != null && head2 != null) {
-            LinkedListNode temp = head1;
-            while (temp.data < head2.data) {
-                temp = head1;
-                head1 = head1.next;
-            }
-            temp.next = head2;
-            head2.next = head1;
+        if (head1.data < head2.data) {
+            mergedHead = head1;
+            head1 = head1.next;
+        } else {
+            mergedHead = head2;
             head2 = head2.next;
         }
-        return head2;
+        mergedTail = mergedHead;
+        while (head1 != null && head2 != null) {
+            if (head1.data < head2.data) {
+                mergedTail.next = head1;
+                head1 = head1.next;
+            } else {
+                mergedTail.next = head2;
+                head2 = head2.next;
+            }
+            mergedTail = mergedTail.next;
+        }
+
+        if (head1 != null) {
+            mergedTail.next = head1;
+        }
+        if (head2 != null) {
+            mergedTail.next = head2;
+        }
+        return mergedHead;
     }
 
     public static void main(String[] args) {
