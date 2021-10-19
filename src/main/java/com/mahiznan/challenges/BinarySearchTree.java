@@ -69,10 +69,8 @@ class GfG {
     static void printInorder(Node root) {
         if (root == null)
             return;
-
         printInorder(root.left);
         System.out.print(root.data + " ");
-
         printInorder(root.right);
     }
 
@@ -82,32 +80,39 @@ class GfG {
 //        String s = "15 7 16 1 12 N N N 2 10 14";
 //        String s = "2 1 3";
         Node root = buildTree(s);
+//        printInorder(root);
         BinarySearchTree g = new BinarySearchTree();
         if (g.isBST(root))
-            System.out.println(1);
+            System.out.println("Valid BST");
         else
-            System.out.println(0);
+            System.out.println("Not a BST");
     }
 }
 
 public class BinarySearchTree {
     static boolean isBST(Node root, Node l, Node r) {
         // Base condition
-        if (root == null)
+        if (root == null) {
+            System.out.println("End of Path");
             return true;
+        }
+        System.out.println("Checking for node " + root.data);
 
         // if left node exist then check it has
         // correct data or not i.e. left node's data
         // should be less than root's data
-        if (l != null && root.data <= l.data)
+        if (l != null && root.data <= l.data) {
+            System.out.println("Invalid BST on left check");
             return false;
+        }
 
         // if right node exist then check it has
         // correct data or not i.e. right node's data
         // should be greater than root's data
-        if (r != null && root.data >= r.data)
+        if (r != null && root.data >= r.data) {
+            System.out.println("Invalid BST on right check");
             return false;
-
+        }
         // check recursively for every node.
         return isBST(root.left, l, root) &&
                 isBST(root.right, root, r);
