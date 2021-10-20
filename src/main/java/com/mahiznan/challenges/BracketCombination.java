@@ -1,7 +1,7 @@
 package com.mahiznan.challenges;
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /*
 In how many ways valid parenthesis can be formed for the given number
@@ -21,12 +21,36 @@ For 3 it can be formed in 5 ways
  */
 class BracketCombination {
 
+    static ArrayList<ArrayList<Character>> printAllBraces(int n) {
+        ArrayList<ArrayList<Character>> result = new ArrayList<>();
+        printBalancedBraceCombinations(new ArrayList<Character>(), 0, 0, n, result);
+        return result;
+    }
+
+    static void printBalancedBraceCombinations(ArrayList<Character> s, int open, int close, int n, ArrayList<ArrayList<Character>> result) {
+
+        if (open + close == n + n) {
+            System.out.println(s);
+            result.add(new ArrayList<>(s));
+            return;
+        }
+        if (close <= open && open < n) {
+            s.add('{');
+            printBalancedBraceCombinations(s, open + 1, close, n, result);
+            s.remove(s.size() - 1);
+        }
+        if (open > close) {
+            s.add('}');
+            printBalancedBraceCombinations(s, open, close + 1, n, result);
+            s.remove(s.size() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
-//        Scanner s = new Scanner(System.in);
-//        System.out.print(calculateBalancedParanthesis(s.nextInt()));
         int n = 2;
-        System.out.println(calculateBalancedParenthesis(n));
+//        System.out.println(calculateBalancedParenthesis(n));
+        printAllBraces(n);
     }
 
     private static int calculateBalancedParenthesis(int n) {
@@ -40,7 +64,6 @@ class BracketCombination {
         }
         return res;
     }
-
 
     private static int calculateParenthesis(char[] str, int n, int pos, int open, int close, int res) {
         if (close == n) {
