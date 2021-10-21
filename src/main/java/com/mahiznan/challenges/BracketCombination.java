@@ -34,12 +34,12 @@ class BracketCombination {
             result.add(new ArrayList<>(s));
             return;
         }
-        if (close <= open && open < n) {
+        if (open < n) {
             s.add('{');
             printBalancedBraceCombinations(s, open + 1, close, n, result);
             s.remove(s.size() - 1);
         }
-        if (open > close) {
+        if (close < open) {
             s.add('}');
             printBalancedBraceCombinations(s, open, close + 1, n, result);
             s.remove(s.size() - 1);
@@ -48,9 +48,9 @@ class BracketCombination {
 
 
     public static void main(String[] args) {
-        int n = 2;
-//        System.out.println(calculateBalancedParenthesis(n));
-        printAllBraces(n);
+        int n = 5;
+        System.out.println(calculateBalancedParenthesis(n));
+//        printAllBraces(n);
     }
 
     private static int calculateBalancedParenthesis(int n) {
