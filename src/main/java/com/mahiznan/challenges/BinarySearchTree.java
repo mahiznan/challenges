@@ -4,6 +4,39 @@ package com.mahiznan.challenges;// { Driver Code Starts
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+public class BinarySearchTree {
+    static boolean isBST(Node root, Node l, Node r) {
+        // Base condition
+        if (root == null) {
+            System.out.println("End of Path");
+            return true;
+        }
+        System.out.println("Checking for node " + root.data);
+
+        // if left node exist then check it has
+        // correct data or not i.e. left node's data
+        // should be less than root's data
+        if (l != null && root.data <= l.data) {
+            System.out.println("Invalid BST on left check");
+            return false;
+        }
+
+        // if right node exist then check it has
+        // correct data or not i.e. right node's data
+        // should be greater than root's data
+        if (r != null && root.data >= r.data) {
+            System.out.println("Invalid BST on right check");
+            return false;
+        }
+        // check recursively for every node.
+        return isBST(root.left, l, root) &&
+                isBST(root.right, root, r);
+    }
+
+    boolean isBST(Node node) {
+        return isBST(node, null, null);
+    }
+}
 
 class GfG {
     // String s = "2 1 2 2";
@@ -89,38 +122,4 @@ class GfG {
     }
 }
 
-public class BinarySearchTree {
-    static boolean isBST(Node root, Node l, Node r) {
-        // Base condition
-        if (root == null) {
-            System.out.println("End of Path");
-            return true;
-        }
-        System.out.println("Checking for node " + root.data);
 
-        // if left node exist then check it has
-        // correct data or not i.e. left node's data
-        // should be less than root's data
-        if (l != null && root.data <= l.data) {
-            System.out.println("Invalid BST on left check");
-            return false;
-        }
-
-        // if right node exist then check it has
-        // correct data or not i.e. right node's data
-        // should be greater than root's data
-        if (r != null && root.data >= r.data) {
-            System.out.println("Invalid BST on right check");
-            return false;
-        }
-        // check recursively for every node.
-        return isBST(root.left, l, root) &&
-                isBST(root.right, root, r);
-    }
-
-    boolean isBST(Node node) {
-        return isBST(node, null, null);
-    }
-
-
-}

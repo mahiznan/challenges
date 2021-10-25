@@ -4,6 +4,18 @@ public class KthPermutation {
 
     static int count = 0, target = 6;
 
+
+    static void printAllPermutationsPractice(int[] ar,int l,int r) {
+        if (l == r) {
+            printArray(ar);
+        }
+        for(int i=l;i<=r;i++){
+            swap(ar,l,i);
+            printAllPermutationsPractice(ar,l+1,r);
+            swap(ar,l,i);
+        }
+    }
+
     static void printAllPermutations(int[] values, int l, int r) {
         if (l == r) {
             printArray(values);
@@ -46,9 +58,10 @@ public class KthPermutation {
 
 
     public static void main(String[] args) {
-        int[] values = {1, 2, 3, 1};
+        int[] values = {1, 2, 3};
         int p = 6;
-        printAllPermutations(values, 0, values.length - 1);
-        printKthPermutation(values, 0, values.length - 1);
+        printAllPermutationsPractice(values, 0, values.length - 1);
+//        printAllPermutations(values, 0, values.length - 1);
+//        printKthPermutation(values, 0, values.length - 1);
     }
 }
