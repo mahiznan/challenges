@@ -28,7 +28,6 @@ public class RotateMatrix {
         printMatrix(matrix);
     }
 
-
     static void printMatrix(int[][] matrix) {
         for (int[] row : matrix) {
             for (int v : row) {
