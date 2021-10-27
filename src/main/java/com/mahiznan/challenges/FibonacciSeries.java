@@ -2,7 +2,8 @@ package com.mahiznan.challenges;
 
 public class FibonacciSeries {
     public static void main(String[] args) {
-        printFibonacciSeries(20);
+        int i = 20;
+        printFibonacciSeries(i);
     }
 
     private static void printFibonacciSeries(int i) {
