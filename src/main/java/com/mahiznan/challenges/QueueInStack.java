@@ -7,8 +7,8 @@ Implement queue using stack
 import java.util.Stack;
 
 class Queue {
-    Stack<Integer> input = new Stack<Integer>();
-    Stack<Integer> output = new Stack<Integer>();
+    Stack<Integer> input = new Stack<>();
+    Stack<Integer> output = new Stack<>();
 
     /*The method pop which return the element popped out of the stack*/
     int dequeue() {

@@ -1,6 +1,11 @@
 package com.mahiznan.challenges;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class MergeLinkedList {
+
+    Queue<Integer> k = new LinkedList<>();
 
     public static LinkedListNode merge_sorted(
             LinkedListNode head1,
