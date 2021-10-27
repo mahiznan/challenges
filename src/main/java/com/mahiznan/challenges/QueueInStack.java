@@ -10,7 +10,7 @@ class Queue {
     Stack<Integer> input = new Stack<Integer>();
     Stack<Integer> output = new Stack<Integer>();
 
-    /*The method pop which return the element poped out of the stack*/
+    /*The method pop which return the element popped out of the stack*/
     int dequeue() {
         while (!input.isEmpty()) {
             output.push(input.pop());
