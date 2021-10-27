@@ -6,7 +6,8 @@ import java.util.Stack;
 
 public class StockSpan {
 
-    public static int[] calculateSpanApproach2(int price[], int n) {
+
+    public static int[] calculateSpanApproach2(int[] price, int n) {
         int[] span = new int[n];
         Stack<Integer> stack = new Stack<>();
         //1, 1, 2, 5, 1, 7
