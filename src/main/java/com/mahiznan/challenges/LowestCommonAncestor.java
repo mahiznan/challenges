@@ -1,6 +1,6 @@
 package com.mahiznan.challenges;
 
-import java.util.*;
+import java.util.Scanner;
 
 class Node {
     Node left;
@@ -29,6 +29,16 @@ class Solution {
             return lca(root.right, v1, v2);
         return root;
     }
+
+
+    public static Node lcaPractice(Node node, int v1, int v2) {
+        if (node.data > v1 && node.data > v2)
+            return lca(node.left, v1, v2);
+        if (node.data < v1 && node.data < v2)
+            return lca(node.right, v1, v2);
+        return node;
+    }
+
 
     public static Node insert(Node root, int data) {
         if (root == null) {

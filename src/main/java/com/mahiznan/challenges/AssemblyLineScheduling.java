@@ -17,11 +17,27 @@ public class AssemblyLineScheduling {
         return Math.min(L1[s - 1] + x[0], L2[s - 1] + x[1]);
     }
 
+
+    static int calculateMinCostPractice(int[][] cost, int[][] time, int[] ecost, int[] xcost, int s) {
+        int[][] dp = new int[2][s];
+        dp[0][0] = ecost[0] + cost[0][0];
+        dp[1][0] = ecost[1] + cost[1][0];
+
+        for (int i = 1; i < s; i++) {
+            dp[0][i] = Math.min(dp[0][i - 1] + cost[0][i], dp[1][i - 1] + time[1][i] + cost[0][i]);
+            dp[1][i] = Math.min(dp[1][i - 1] + cost[1][i], dp[0][i - 1] + time[0][i] + cost[1][i]);
+        }
+
+        return Math.min(dp[0][s - 1] + xcost[0], dp[1][s - 1] + xcost[1]);
+    }
+
+
     public static void main(String[] args) {
         int[][] a = {{4, 5, 3, 2}, {2, 10, 1, 4}};
         int[][] t = {{0, 7, 4, 5}, {0, 9, 2, 8}};
         int[] e = {10, 12};
         int[] x = {18, 7};
         System.out.println(calculateMinCost(a, t, e, x, a[0].length));
+        System.out.println(calculateMinCostPractice(a, t, e, x, a[0].length));
     }
 }

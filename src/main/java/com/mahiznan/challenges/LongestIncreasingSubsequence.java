@@ -9,9 +9,9 @@ public class LongestIncreasingSubsequence {
 //        int[] ar = {3, 10, 2, 11};
 //        int[] ar = {10, 22, 9, 33, 21, 50, 41, 60, 80};
         int[] ar = {4, 10, 4, 3, 8, 9};
-        int[] res = new int[ar.length];
+        int length = ar.length;
         maxValue = 1;
-        System.out.println("Longest Increasing subsequence is " + subsequence(ar, ar.length));
+        System.out.println("Longest Increasing subsequence is " + subsequence(ar, length));
     }
 
     private static int subsequence(int[] array, int n) {

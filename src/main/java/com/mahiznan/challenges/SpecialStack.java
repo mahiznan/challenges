@@ -12,12 +12,13 @@ class SpecialStackWithNoExtraMemory {
             min = i;
         }
         int v = i * d + min;
+        min = Math.min(i, min);
         stack.push(v);
     }
 
     int pop() {
         int v = stack.pop();
-        min = stack.peek() % d;
+        min = Math.min(stack.peek() % d, min);
         return v / d;
     }
 
@@ -33,6 +34,7 @@ public class SpecialStack {
     Stack<Integer> s2 = new Stack<>();
 
     public static void main(String[] args) {
+        /*
         SpecialStack s = new SpecialStack();
         s.push(2);
         s.push(9);
@@ -42,11 +44,14 @@ public class SpecialStack {
         System.out.println(s.getMin());
         System.out.println(s.pop());
         System.out.println(s.getMin());
-
-
+*/
         SpecialStackWithNoExtraMemory s2 = new SpecialStackWithNoExtraMemory();
-        s2.push(3);
         s2.push(9);
+        System.out.println(s2.min());
+        s2.push(3);
+        System.out.println(s2.min);
+
+        /*
         s2.push(4);
         s2.push(2);
         s2.push(1);
@@ -55,6 +60,8 @@ public class SpecialStack {
         System.out.println(s2.min());
         System.out.println(s2.pop());
         System.out.println(s2.min());
+
+         */
     }
 
     void push(int i) {

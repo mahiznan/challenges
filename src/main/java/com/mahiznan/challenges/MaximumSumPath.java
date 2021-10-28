@@ -4,6 +4,18 @@ public class MaximumSumPath {
 
     static int result = Integer.MIN_VALUE;
 
+    static int maxSumPathPractice2(Node node) {
+        if (node == null)
+            return 0;
+        int current = node.data;
+        int left = maxSumPathPractice2(node.left);
+        int right = maxSumPathPractice2(node.right);
+        int singleMax = Math.max(Math.max(left, right) + current, current);
+        int totalMax = Math.max(singleMax, left + right + current);
+        result = Math.max(result, totalMax);
+
+        return singleMax;
+    }
 
     static int maxSumPathPractice(Node node) {
         if (node == null) {
@@ -50,7 +62,9 @@ public class MaximumSumPath {
         node6.left = node7;
         node6.right = node8;
 //        maxSumPath(node1);
-        maxSumPathPractice(node1);
+//        maxSumPathPractice(node1);
+//        System.out.println(result);
+        maxSumPathPractice2(node1);
         System.out.println(result);
     }
 }

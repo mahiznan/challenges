@@ -70,7 +70,8 @@ public class RotateMatrix {
 
         //        rotate90DegreeAndPrint(matrix);
         printMatrix(matrix);
-//        rotateAntiClockwise90Degree(matrix, matrix.length);
+        rotateAntiClockwise90Degree(matrix, matrix.length);
         rotateClockwise90Degree(matrix, matrix.length);
+        printMatrix(matrix);
     }
 }
