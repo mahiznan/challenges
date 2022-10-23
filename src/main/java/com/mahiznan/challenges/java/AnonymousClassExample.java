@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.core;
+package com.mahiznan.challenges.java;
 
 class Bird {
     String name = "";

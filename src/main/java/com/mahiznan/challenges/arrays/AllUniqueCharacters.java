@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.cci.arrays;
+package com.mahiznan.challenges.arrays;
 
 import java.util.HashMap;
 

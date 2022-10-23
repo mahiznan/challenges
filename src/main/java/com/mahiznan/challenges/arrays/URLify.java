@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.cci.arrays;
+package com.mahiznan.challenges.arrays;
 
 public class URLify {
     static String getUrlString(char[] str, int trueLength) {

@@ -9,9 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-
-class Result {
-
+public class RansomNote {
     /*
      * Complete the 'checkMagazine' function below.
      *
@@ -46,10 +44,6 @@ class Result {
         }
     }
 
-
-}
-
-public class RansomNote {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -65,7 +59,7 @@ public class RansomNote {
         List<String> note = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
                 .collect(toList());
 
-        Result.checkMagazine(magazine, note);
+        checkMagazine(magazine, note);
 
         bufferedReader.close();
     }

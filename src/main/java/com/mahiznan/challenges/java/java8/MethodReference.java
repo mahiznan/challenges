@@ -1,7 +1,9 @@
-package com.mahiznan.challenges.core.java8;
+package com.mahiznan.challenges.java.java8;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+@java.lang.FunctionalInterface
+interface Greetings {
+    void welcome(String name);
+}
 
 class Utils {
 
@@ -10,12 +12,6 @@ class Utils {
     }
 
 }
-
-@java.lang.FunctionalInterface
-interface Greetings {
-    void welcome(String name);
-}
-
 
 public class MethodReference {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.core.java8;
+package com.mahiznan.challenges.java.java8;
 
 import java.time.LocalDateTime;
 import java.util.*;

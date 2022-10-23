@@ -1,21 +1,12 @@
 package com.mahiznan.challenges.arrays;
 
 
+import com.mahiznan.util.Node;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-class Node {
-    Node left, right;
-    int data;
-
-    Node(int data) {
-        this.data = data;
-        left = right = null;
-    }
-}
-
 
 public class LevelOrderTraversal {
 

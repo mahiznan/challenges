@@ -1,5 +1,7 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.Node;
+
 public class BinaryTree2DLL {
 
     static Node prev;

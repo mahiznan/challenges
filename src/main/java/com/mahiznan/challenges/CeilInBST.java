@@ -1,7 +1,7 @@
 package com.mahiznan.challenges;
 
-import common.BinaryTreeNode;
-import common.Util;
+import com.mahiznan.util.Node;
+import com.mahiznan.util.Util;
 
 /*
  * Given a BST and a number X, find ceil of X in the binary tree.
@@ -23,7 +23,7 @@ import common.Util;
  *
  * */
 public class CeilInBST {
-    static int findCeil(BinaryTreeNode root, int key) {
+    static int findCeil(Node root, int key) {
         int ceil = -1, t;
         if (root == null) return ceil;
         if (root.data == key)
@@ -45,7 +45,7 @@ public class CeilInBST {
 //        int key = 6;
         String tree = "7 1 9 N 4 8 10";
         int key = 2;
-        BinaryTreeNode root = Util.buildBinaryTree(tree);
+        Node root = Util.buildBinaryTree(tree);
         System.out.println(findCeil(root, key));
     }
 }

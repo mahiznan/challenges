@@ -1,8 +1,6 @@
-package com.mahiznan.challenges.core;// A Java program to demonstrate working of
+package com.mahiznan.challenges.java;
+// A Java program to demonstrate working of
 // synchronized.
-
-import java.io.*;
-import java.util.*;
 
 // A Class used to send a message
 class Sender {
@@ -19,8 +17,8 @@ class Sender {
 
 // Class for send a message using Threads
 class ThreadedSend extends Thread {
-    private String msg;
     Sender sender;
+    private final String msg;
 
     // Receives a message object and a string
     // message to be sent
@@ -41,7 +39,7 @@ class ThreadedSend extends Thread {
 
 // Driver class
 class SyncDemo {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Sender snd = new Sender();
         ThreadedSend S1 =
                 new ThreadedSend(" Hi ", snd);

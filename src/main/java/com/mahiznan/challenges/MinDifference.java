@@ -44,7 +44,7 @@ Here difference means number of different characters.You can do only one operati
  */
 
 
-class MinimumDifference {
+public class MinDifference {
     public static void main(String[] args) {
         //Test case 1
 //        String s = "abc";
@@ -72,8 +72,8 @@ class MinimumDifference {
     private static int getDifference(String t, String s) {
         int i = 0;
         int j = 0;
-        int A[] = new int[26];
-        int B[] = new int[26];
+        int[] A = new int[26];
+        int[] B = new int[26];
         for (int a = 0; a < t.length(); a++) {
             A[t.charAt(a) - 'a']++;
         }

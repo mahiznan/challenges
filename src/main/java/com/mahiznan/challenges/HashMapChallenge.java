@@ -2,69 +2,18 @@ package com.mahiznan.challenges;
 
 import java.util.*;
 
-class NumberContainer {
-
-    Map<Long, Long> container = new HashMap<>();
-
-    public void insertOrReplace(Long index, Long number) {
-        container.put(index, number);
-    }
-
-    public Long findSmallestIndex(Long number) {
-
-        //Approach 1
-        if (container.isEmpty() || !container.containsValue(number))
-            return -1L;
-        long index = Long.MAX_VALUE;
-        for (Map.Entry<Long, Long> e : container.entrySet()) {
-            index = e.getValue().equals(number) && index > e.getKey() ? e.getKey() : index;
-        }
-        System.out.println("Approach 1  Index value is " + index);
-
-        //Approach 2
-        Set<Map.Entry<Long, Long>> containerSet = container.entrySet();
-        Map.Entry<Long, Long> m = containerSet.stream().filter(e -> e.getValue().equals(number)).min(Map.Entry.comparingByKey()).get();
-        index = m.getKey();
-        System.out.println("Approach 2  Index value is " + index);
-
-
-        //Approach 3
-        Optional<Long> v = containerSet.stream()
-                .filter(e -> e.getValue().equals(number))
-                .map(Map.Entry::getKey)
-                .min(Long::compare);
-
-        index = v.isPresent() ? v.get() : -1;
-        System.out.println("Approach 3  Index value is " + index);
-
-
-        return index;
-    }
-
-    public Long findSmallestIndex(NavigableMap<Long, Long> navigableMap, Long number) {
-        return number;
-    }
-
-
-    public void print() {
-        for (Map.Entry<Long, Long> item : container.entrySet()) {
-            System.out.println(container.get(item.getKey()));
-        }
-    }
-}
-
-
 public class HashMapChallenge {
 
+    static Map<Long, Long> container = new HashMap<>();
+
     public static void main(String[] args) {
-        NumberContainer numberContainer = new NumberContainer();
-        numberContainer.insertOrReplace(10L, 10L);
-        numberContainer.insertOrReplace(2L, 20L);
-        numberContainer.insertOrReplace(9L, 30L);
-        numberContainer.insertOrReplace(1L, 15L);
-        numberContainer.insertOrReplace(12L, 15L);
-        numberContainer.insertOrReplace(1L, 15L);
-        numberContainer.insertOrReplace(2L, 5L);
+        insertOrReplace(10L, 10L);
+        insertOrReplace(2L, 20L);
+        insertOrReplace(9L, 30L);
+        insertOrReplace(1L, 15L);
+        insertOrReplace(12L, 15L);
+        insertOrReplace(1L, 15L);
+        insertOrReplace(2L, 5L);
 //        numberContainer.print();
 //        System.out.println("Print Over");
 //        System.out.println(numberContainer.findSmallestIndex(30L));
@@ -122,6 +71,51 @@ public class HashMapChallenge {
         System.out.println(navigableMap.floorKey(15L));
         System.out.println(navigableMap.ceilingKey(15L));
 
+    }
+
+    public static void insertOrReplace(Long index, Long number) {
+        container.put(index, number);
+    }
+
+    public Long findSmallestIndex(Long number) {
+
+        //Approach 1
+        if (container.isEmpty() || !container.containsValue(number))
+            return -1L;
+        long index = Long.MAX_VALUE;
+        for (Map.Entry<Long, Long> e : container.entrySet()) {
+            index = e.getValue().equals(number) && index > e.getKey() ? e.getKey() : index;
+        }
+        System.out.println("Approach 1  Index value is " + index);
+
+        //Approach 2
+        Set<Map.Entry<Long, Long>> containerSet = container.entrySet();
+        Map.Entry<Long, Long> m = containerSet.stream().filter(e -> e.getValue().equals(number)).min(Map.Entry.comparingByKey()).get();
+        index = m.getKey();
+        System.out.println("Approach 2  Index value is " + index);
+
+
+        //Approach 3
+        Optional<Long> v = containerSet.stream()
+                .filter(e -> e.getValue().equals(number))
+                .map(Map.Entry::getKey)
+                .min(Long::compare);
+
+        index = v.isPresent() ? v.get() : -1;
+        System.out.println("Approach 3  Index value is " + index);
+
+
+        return index;
+    }
+
+    public Long findSmallestIndex(NavigableMap<Long, Long> navigableMap, Long number) {
+        return number;
+    }
+
+    public void print() {
+        for (Map.Entry<Long, Long> item : container.entrySet()) {
+            System.out.println(container.get(item.getKey()));
+        }
     }
 
 

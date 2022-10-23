@@ -1,27 +1,10 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.Node;
+
 import java.util.Scanner;
 
-class Node {
-    Node left;
-    Node right;
-    int data;
-
-    Node(int data) {
-        this.data = data;
-        left = null;
-        right = null;
-    }
-}
-
-class Solution {
-
-    /*
-    class Node
-        int data;
-        Node left;
-        Node right;
-    */
+public class LowestCommonAncestor {
     public static Node lca(Node root, int v1, int v2) {
         if (root.data > v1 && root.data > v2)
             return lca(root.left, v1, v2);
@@ -29,7 +12,6 @@ class Solution {
             return lca(root.right, v1, v2);
         return root;
     }
-
 
     public static Node lcaPractice(Node node, int v1, int v2) {
         if (node.data > v1 && node.data > v2)

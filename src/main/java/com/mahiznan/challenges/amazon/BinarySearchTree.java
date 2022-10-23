@@ -1,28 +1,42 @@
-package com.mahiznan.challenges;
+package com.mahiznan.challenges.amazon;
 
-// { Driver Code Starts
-//Initial Template for Java
-//TODO: Not working
+import com.mahiznan.util.Node;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
-class CheckForBST {
-
-
-    static boolean isBST(Node root) {
-        if (root.left == null || root.right == null)
+public class BinarySearchTree {
+    static boolean isBST(Node root, Node l, Node r) {
+        // Base condition
+        if (root == null) {
+            System.out.println("End of Path");
             return true;
-        boolean res = false;
-        if (root.data > root.left.data && root.data < root.right.data) {
-            res = isBST(root.left);
-            if (res)
-                res = isBST(root.right);
         }
-        return res;
+        System.out.println("Checking for node " + root.data);
 
+        // if left node exist then check it has
+        // correct data or not i.e. left node's data
+        // should be less than root's data
+        if (l != null && root.data <= l.data) {
+            System.out.println("Invalid BST on left check");
+            return false;
+        }
+
+        // if right node exist then check it has
+        // correct data or not i.e. right node's data
+        // should be greater than root's data
+        if (r != null && root.data >= r.data) {
+            System.out.println("Invalid BST on right check");
+            return false;
+        }
+        // check recursively for every node.
+        return isBST(root.left, l, root) &&
+                isBST(root.right, root, r);
+    }
+
+    static boolean isBST(Node node) {
+        return isBST(node, null, null);
     }
 
     static Node buildTree(String str) {
@@ -31,7 +45,7 @@ class CheckForBST {
             return null;
         }
 
-        String ip[] = str.split(" ");
+        String[] ip = str.split(" ");
         // Create the root of the tree
         Node root = new Node(Integer.parseInt(ip[0]));
         // Push the root to the queue
@@ -85,38 +99,26 @@ class CheckForBST {
     static void printInorder(Node root) {
         if (root == null)
             return;
-
         printInorder(root.left);
         System.out.print(root.data + " ");
-
         printInorder(root.right);
     }
 
     public static void main(String[] args) throws IOException {
-        /*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-        while (t > 0) {
-            String s = br.readLine();
-            Node root = buildTree(s);
-            if (isBST(root))
-                System.out.println(1);
-            else
-                System.out.println(0);
-            t--;
-        }*/
-//        String s = "2 7 6 5 9 2 6";
-        String s = "2 N 7 N 6 N 5 N 9 N 2 N 6";
+//        String s = "2 1 2 2";
+//        String s = "1 1 1 1 1 N 1 1 1 1 1";
+//        String s = "3 2 5 1 4";
+//        String s = "2 1 2 2";
+//        String s = "3 2 5 1 4";
+        String s = "15 7 16 1 12 N N N 2 10 14";
+//        String s = "2 1 3";
         Node root = buildTree(s);
-        //printInorder(root);
-        assert root != null;
+        printInorder(root);
         if (isBST(root))
-            System.out.println("Balanced Tree");
+            System.out.println("Valid BST");
         else
-            System.out.println("Unbalanced Tree");
-
-
+            System.out.println("Not a BST");
     }
-
 }
 
 

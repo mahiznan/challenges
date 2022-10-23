@@ -1,5 +1,7 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.LinkedListNode;
+
 public class LoopInLinkedList {
     public static void main(String[] args) {
         LinkedListNode node1 = new LinkedListNode(1);

@@ -1,5 +1,7 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.Node;
+
 public class MaximumSumPath {
 
     static int result = Integer.MIN_VALUE;

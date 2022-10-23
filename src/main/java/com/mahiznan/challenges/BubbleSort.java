@@ -9,14 +9,12 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-class Bubble {
-
+public class BubbleSort {
     /*
      * Complete the 'countSwaps' function below.
      *
      * The function accepts INTEGER_ARRAY a as parameter.
      */
-
     public static void countSwaps(List<Integer> a) {
         int swap = 0;
         for (int i = 0; i < a.size() - 1; i++) {
@@ -32,9 +30,6 @@ class Bubble {
 
     }
 
-}
-
-public class BubbleSort {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -43,9 +38,7 @@ public class BubbleSort {
         List<Integer> a = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
                 .map(Integer::parseInt)
                 .collect(toList());
-
-        Bubble.countSwaps(a);
-
+        countSwaps(a);
         bufferedReader.close();
     }
 }

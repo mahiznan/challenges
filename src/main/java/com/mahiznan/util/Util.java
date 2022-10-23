@@ -1,4 +1,4 @@
-package common;
+package com.mahiznan.util;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -7,7 +7,7 @@ public class Util {
     // String s = "2 1 2 2";
     // String s = "1 1 1 1 1 N 1 1 1 1 1";
     //String s = "3 2 5 1 4";
-    public static BinaryTreeNode buildBinaryTree(String str) {
+    public static Node buildBinaryTree(String str) {
 
         if (str.length() == 0 || str.charAt(0) == 'N') {
             return null;
@@ -15,10 +15,10 @@ public class Util {
 
         String[] ip = str.split(" ");
         // Create the root of the tree
-        BinaryTreeNode root = new BinaryTreeNode(Integer.parseInt(ip[0]));
+        Node root = new Node(Integer.parseInt(ip[0]));
         // Push the root to the queue
 
-        Queue<BinaryTreeNode> queue = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
 
         queue.add(root);
         // Starting from the second element
@@ -27,7 +27,7 @@ public class Util {
         while (queue.size() > 0 && i < ip.length) {
 
             // Get and remove the front of the queue
-            BinaryTreeNode currNode = queue.peek();
+            Node currNode = queue.peek();
             queue.remove();
 
             // Get the current node's value from the string
@@ -37,7 +37,7 @@ public class Util {
             if (!currVal.equals("N")) {
 
                 // Create the left child for the current node
-                currNode.left = new BinaryTreeNode(Integer.parseInt(currVal));
+                currNode.left = new Node(Integer.parseInt(currVal));
                 // Push it to the queue
                 queue.add(currNode.left);
             }
@@ -53,7 +53,7 @@ public class Util {
             if (!currVal.equals("N")) {
 
                 // Create the right child for the current node
-                currNode.right = new BinaryTreeNode(Integer.parseInt(currVal));
+                currNode.right = new Node(Integer.parseInt(currVal));
 
                 // Push it to the queue
                 queue.add(currNode.right);

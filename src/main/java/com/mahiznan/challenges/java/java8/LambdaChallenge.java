@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.core.java8;
+package com.mahiznan.challenges.java.java8;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,15 +45,15 @@ public class LambdaChallenge {
             int num = Integer.parseInt(st.nextToken());
             if (ch == 1) {
                 op = ob.isOdd();
-                ret = ob.checker(op, num);
+                ret = MyMath.checker(op, num);
                 ans = (ret) ? "ODD" : "EVEN";
             } else if (ch == 2) {
                 op = ob.isPrime();
-                ret = ob.checker(op, num);
+                ret = MyMath.checker(op, num);
                 ans = (ret) ? "PRIME" : "COMPOSITE";
             } else if (ch == 3) {
                 op = ob.isPalindrome();
-                ret = ob.checker(op, num);
+                ret = MyMath.checker(op, num);
                 ans = (ret) ? "PALINDROME" : "NOT PALINDROME";
 
             }

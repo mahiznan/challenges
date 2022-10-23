@@ -1,5 +1,7 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.Node;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

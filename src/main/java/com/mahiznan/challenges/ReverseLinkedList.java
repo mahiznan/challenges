@@ -1,5 +1,7 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.LinkedListNode;
+
 import java.io.IOException;
 
 public class ReverseLinkedList {
@@ -41,7 +43,7 @@ public class ReverseLinkedList {
         return tHead;
     }
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         int n = 5;
         int[] arr = {10, 9, 8, 7, 2};
@@ -58,14 +60,5 @@ public class ReverseLinkedList {
     }
 }
 
-class LinkedListNode {
-    int data;
-    LinkedListNode next;
 
-    LinkedListNode(int x) {
-        data = x;
-        next = null;
-    }
-
-}
 

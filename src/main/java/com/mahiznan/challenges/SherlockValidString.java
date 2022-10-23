@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-class Sherlock {
+public class SherlockValidString {
 
     /*
      * Complete the 'isValid' function below.
@@ -13,7 +13,7 @@ class Sherlock {
      * The function accepts STRING s as parameter.
      */
 
-    public static String isValid(String s) {
+    static String isValid(String s) {
         Map<Character, Integer> characterMap = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             if (characterMap.containsKey(s.charAt(i))) {
@@ -55,9 +55,6 @@ class Sherlock {
 
     }
 
-}
-
-public class SherlockValidString {
     public static void main(String[] args) throws IOException {
 //        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 //        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
@@ -69,7 +66,7 @@ public class SherlockValidString {
 //        String result = Sherlock.isValid("abcdefghhgfedecba"); //NO
 //        String result = Sherlock.isValid("abbcc");
 //        System.out.println(Sherlock.isValid("aaaaabc"));
-        System.out.println(Sherlock.isValid("abbccc"));
+        System.out.println(isValid("abbccc"));
 //        bufferedWriter.write(result);
 //        bufferedWriter.newLine();
 //

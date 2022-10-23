@@ -1,5 +1,7 @@
 package com.mahiznan.challenges;
 
+import com.mahiznan.util.LinkedListNode;
+
 public class MergeLinkedList {
 
     public static LinkedListNode merge_sorted(

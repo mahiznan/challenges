@@ -52,8 +52,27 @@ Complete the function maximum_profit() which takes an integer n and a 2D integer
     1 <= profit earned by choosing ith interval <= 105
 */
 
-//Their Solution
-class MaxProfitFinder {
+public class MaxProfitFromSubset {
+    public static boolean canIncludeThisTrip(int lastTrip, int currentTrip, int[][] trips) {
+        if (currentTrip == 0 || lastTrip == -1)
+            return true;
+        return trips[lastTrip][1] <= trips[currentTrip][0] && trips[lastTrip][0] < trips[currentTrip][0];
+    }
+
+    public static int maximum_profit(int n, int[][] intervals) {
+        return drive(0, -1, 0, intervals);
+    }
+
+    public static int drive(int currentProfit, int lastTrip, int currentTrip, int[][] trips) {
+        int profit1 = 0, profit2;
+        if (currentTrip >= trips.length)
+            return currentProfit;
+        if (canIncludeThisTrip(lastTrip, currentTrip, trips))
+            profit1 = drive(currentProfit + trips[currentTrip][2], currentTrip, currentTrip + 1, trips);
+        profit2 = drive(currentProfit, lastTrip, currentTrip + 1, trips);
+        return Math.max(profit1, profit2);
+    }
+
     static int find_nearest_equal_or_greater(int start, int end, int value, int n, int[][] intervals) {
         // If nothing found, position will be n.
         int position = n;
@@ -91,7 +110,7 @@ class MaxProfitFinder {
         return dp[index] = answer;
     }
 
-    public static int maximum_profit(int n, int[][] intervals) {
+    public static int maximum_profitApproach2(int n, int[][] intervals) {
         Arrays.sort(intervals, new Comparator<int[]>() {
             public int compare(int[] a1, int[] a2) {
                 if (a1[0] == a2[0]) {
@@ -105,30 +124,6 @@ class MaxProfitFinder {
         int[] dp = new int[n];
         Arrays.fill(dp, -1);
         return maximum_profit_helper(0, n, intervals, dp);
-    }
-
-}
-
-//My Solution
-public class MaxProfitFromSubset {
-    public static boolean canIncludeThisTrip(int lastTrip, int currentTrip, int[][] trips) {
-        if (currentTrip == 0 || lastTrip == -1)
-            return true;
-        return trips[lastTrip][1] <= trips[currentTrip][0] && trips[lastTrip][0] < trips[currentTrip][0];
-    }
-
-    public static int maximum_profit(int n, int[][] intervals) {
-        return drive(0, -1, 0, intervals);
-    }
-
-    public static int drive(int currentProfit, int lastTrip, int currentTrip, int[][] trips) {
-        int profit1 = 0, profit2;
-        if (currentTrip >= trips.length)
-            return currentProfit;
-        if (canIncludeThisTrip(lastTrip, currentTrip, trips))
-            profit1 = drive(currentProfit + trips[currentTrip][2], currentTrip, currentTrip + 1, trips);
-        profit2 = drive(currentProfit, lastTrip, currentTrip + 1, trips);
-        return Math.max(profit1, profit2);
     }
 
     public static void main(String[] args) {

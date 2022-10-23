@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.core.java8;
+package com.mahiznan.challenges.java.java8;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,14 +16,14 @@ interface Radio {
 
 @java.lang.FunctionalInterface
 interface FnInterface {
+    static void scream() {
+        System.out.println("Scream");
+    }
+
     void play(String name);
 
     default void shout() {
         System.out.println("Shout");
-    }
-
-    static void scream() {
-        System.out.println("Scream");
     }
 }
 

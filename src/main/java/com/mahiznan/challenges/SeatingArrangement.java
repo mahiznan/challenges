@@ -34,10 +34,9 @@ Conditions:
     seats[i] == 0 or seats[i] == 1
  */
 
+public class SeatingArrangement {
 
-//Best Solution
-class SeatingArrangementTheirAnswer {
-    public static boolean is_possible_to_get_seats(int n, int m, int[] seats) {
+    public static boolean is_possible_to_get_seatsApproach2(int n, int m, int[] seats) {
         int available_seats = 0;
         for (int i = 0; i < m; i++) {
             int prev;
@@ -57,9 +56,6 @@ class SeatingArrangementTheirAnswer {
         }
         return available_seats >= n;
     }
-}
-
-public class SeatingArrangement {
 
     public static boolean canSit(int index, int[] seats) {
         if (seats.length == 1)

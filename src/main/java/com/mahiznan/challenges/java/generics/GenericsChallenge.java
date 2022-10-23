@@ -1,4 +1,4 @@
-package com.mahiznan.challenges.core.generics;
+package com.mahiznan.challenges.java.generics;
 
 import java.util.Arrays;
 import java.util.List;

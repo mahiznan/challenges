@@ -1,4 +1,4 @@
-package com.mahiznan.challenges;
+package com.mahiznan.challenges.amazon;
 
 /*
 Given a String. Validate the string and return whether it is valid or not.
