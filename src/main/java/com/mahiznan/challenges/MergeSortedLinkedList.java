@@ -2,11 +2,9 @@ package com.mahiznan.challenges;
 
 import com.mahiznan.util.LinkedListNode;
 
-public class MergeLinkedList {
+public class MergeSortedLinkedList {
 
-    public static LinkedListNode merge_sorted(
-            LinkedListNode head1,
-            LinkedListNode head2) {
+    static LinkedListNode merge_sorted(LinkedListNode head1, LinkedListNode head2) {
         LinkedListNode mergedHead, mergedTail;
         if (head1 == null) {
             return head2;
@@ -43,6 +41,37 @@ public class MergeLinkedList {
         return mergedHead;
     }
 
+
+    static LinkedListNode merge_sorted_practice(LinkedListNode head1, LinkedListNode head2) {
+        LinkedListNode head, root;
+        if (head1.data < head2.data) {
+            head = head1;
+            head1 = head1.next;
+        } else {
+            head = head2;
+            head2 = head2.next;
+        }
+        root = head;
+
+        while (head1 != null && head2 != null) {
+            if (head1.data < head2.data) {
+                head.next = head1;
+                head1 = head1.next;
+            } else {
+                head.next = head2;
+                head2 = head2.next;
+            }
+            head = head.next;
+        }
+        if (head1 != null) {
+            head.next = head1;
+        }
+        if (head2 != null) {
+            head.next = head2;
+        }
+        return root;
+    }
+
     public static void main(String[] args) {
         LinkedListNode node1 = new LinkedListNode(4);
         LinkedListNode node2 = new LinkedListNode(8);
@@ -62,7 +91,7 @@ public class MergeLinkedList {
         node7.next = node8;
         node8.next = null;
 
-        LinkedListNode head = merge_sorted(node1, node5);
+        LinkedListNode head = merge_sorted_practice(node1, node5);
         while (head != null) {
             System.out.print(head.data + "->");
             head = head.next;

@@ -1,12 +1,9 @@
-package com.mahiznan.challenges.arrays;
+package com.mahiznan.challenges.amazon;
 
 
 import com.mahiznan.util.Node;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class LevelOrderTraversal {
 
@@ -33,7 +30,7 @@ public class LevelOrderTraversal {
     }
 
     //Approach 1
-    static void print(Node node) {
+    static void printRecursive(Node node) {
         int height = height(node);
         List<Integer> elements = new ArrayList<>();
         for (int i = height; i >= 1; i--) {
@@ -42,7 +39,6 @@ public class LevelOrderTraversal {
             elements.clear();
         }
     }
-
 
     //Approach 2 (Using single Queue)
     static void printUsingQueue(Node node) {
@@ -78,12 +74,29 @@ public class LevelOrderTraversal {
 
             if (currentQueue.isEmpty()) {
                 System.out.println();
-                Queue<Node> q = nextQueue;
+                Queue<Node> temp = nextQueue;
                 nextQueue = currentQueue;
-                currentQueue = q;
+                currentQueue = temp;
             }
         }
 
+    }
+
+    static String printUsingQueuePractice(Node node) {
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(node);
+        StringBuilder s = new StringBuilder();
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+//            System.out.print(" " + node.data);
+            s.append(node.data);
+            s.append(",");
+            if (node.left != null)
+                queue.add(node.left);
+            if (node.right != null)
+                queue.add(node.right);
+        }
+        return s.toString();
     }
 
     public static void main(String[] args) {
@@ -103,10 +116,9 @@ public class LevelOrderTraversal {
         node3.left = node7;
 
 
-        print(node1);
-        printUsingQueue(node1);
+//        printRecursive(node1);
+//        printUsingQueue(node1);
         printUsingTwoQueue(node1);
-
-
+//        System.out.println(printUsingQueuePractice(node1));
     }
 }

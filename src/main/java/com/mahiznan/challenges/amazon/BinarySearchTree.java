@@ -36,8 +36,20 @@ public class BinarySearchTree {
     }
 
     static boolean isBST(Node node) {
-        return isBST(node, null, null);
+        return practiceIsBST(node, null, null);
     }
+
+    static boolean practiceIsBST(Node node, Node left, Node right) {
+        if (node == null)
+            return true;
+
+        if (left != null && node.data <= left.data)
+            return false;
+        if (right != null && node.data >= right.data)
+            return false;
+        return practiceIsBST(node.left, left, node) && practiceIsBST(node.right, node, right);
+    }
+
 
     static Node buildTree(String str) {
 
@@ -110,8 +122,9 @@ public class BinarySearchTree {
 //        String s = "3 2 5 1 4";
 //        String s = "2 1 2 2";
 //        String s = "3 2 5 1 4";
-        String s = "15 7 16 1 12 N N N 2 10 14";
+//        String s = "15 7 16 1 12 N N N 2 10 14";
 //        String s = "2 1 3";
+        String s = "15 7 16 1 12 N N N 2 10 14";
         Node root = buildTree(s);
         printInorder(root);
         if (isBST(root))

@@ -1,20 +1,14 @@
-package com.mahiznan.challenges.arrays;
+package com.mahiznan.challenges.amazon;
 
+/*
+Given a set of ‘n’ elements, find their Kth permutation. Consider the following set of elements:
+
+1 2 3
+All permutations of the above elements are (with ordering):
+ */
 public class KthPermutation {
 
     static int count = 0, target = 6;
-
-
-    static void printAllPermutationsPractice(int[] ar,int l,int r) {
-        if (l == r) {
-            printArray(ar);
-        }
-        for(int i=l;i<=r;i++){
-            swap(ar,l,i);
-            printAllPermutationsPractice(ar,l+1,r);
-            swap(ar,l,i);
-        }
-    }
 
     static void printAllPermutations(int[] values, int l, int r) {
         if (l == r) {
@@ -63,5 +57,19 @@ public class KthPermutation {
         printAllPermutationsPractice(values, 0, values.length - 1);
 //        printAllPermutations(values, 0, values.length - 1);
 //        printKthPermutation(values, 0, values.length - 1);
+    }
+
+    private static void printAllPermutationsPractice(int[] values, int l, int r) {
+
+        if (l == r) {
+            printArray(values);
+        }
+
+        for (int i = l; i <= r; i++) {
+            swap(values, l, i);
+            printAllPermutationsPractice(values, l + 1, r);
+            swap(values, l, i);
+        }
+
     }
 }

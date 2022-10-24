@@ -1,5 +1,31 @@
 package com.mahiznan.challenges.amazon;
 
+/*
+
+Given a Bucket having a capacity of N litres and the task is to determine that
+by how many ways you can fill it using two bottles of capacity of 1 Litre and 2 Litre only.
+Find the answer modulo 108.
+
+Input:
+3
+Output:
+3
+Explanation:
+Let O denote filling by 1 litre bottle and
+T denote filling by 2 litre bottle.
+So for N = 3, we have :
+{OOO,TO,OT}. Thus there are 3 total ways.
+
+Input:
+4
+Output:
+5
+Explanation:
+Let O denote filling by 1 litre bottle and
+T denote filling by 2 litre bottle.
+So for N = 4, we have :
+{TT,OOOO,TOO,OTO,OOT} thus there are 5 total ways.
+ */
 public class FillingBucket {
     public static void main(String[] args) {
         int N = 8223;
