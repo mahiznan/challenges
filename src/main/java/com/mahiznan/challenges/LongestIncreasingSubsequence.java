@@ -7,8 +7,8 @@ public class LongestIncreasingSubsequence {
 
     public static void main(String[] args) {
 //        int[] ar = {3, 10, 2, 11};
-//        int[] ar = {10, 22, 9, 33, 21, 50, 41, 60, 80};
-        int[] ar = {4, 10, 4, 3, 8, 9};
+        int[] ar = {10, 22, 9, 33, 21, 50, 41, 60, 80};
+//        int[] ar = {4, 10, 4, 3, 8, 9};
         int length = ar.length;
         maxValue = 1;
         System.out.println("Longest Increasing subsequence is " + subsequence(ar, length));
