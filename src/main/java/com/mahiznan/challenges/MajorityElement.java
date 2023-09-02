@@ -1,4 +1,4 @@
-package com.mahiznan;
+package com.mahiznan.challenges;
 
 import java.util.*;
 
