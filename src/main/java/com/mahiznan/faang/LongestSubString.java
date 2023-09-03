@@ -41,6 +41,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LongestSubString {
+    static int longestSubstringWithoutRepeat_Optimised(String s) {
+        int[] chars = new int[128];
+        int left = 0, right = 0, res = 0;
+        while (right < s.length()) {
+            char r = s.charAt(right);
+            chars[r]++;
+            while (chars[r] > 1) {
+                char l = s.charAt(left);
+                chars[l]--;
+                left++;
+            }
+            res = Math.max(res, right - left + 1);
+            right++;
+        }
+        return res;
+    }
+
+    //Below approach can be improved further
     static int longestSubstringWithoutRepeat(String s) {
         if (s.length() == 1)
             return 1;
@@ -77,6 +95,7 @@ public class LongestSubString {
         s = " ";
         s = "au";
         s = "dvdf";
-        System.out.println(longestSubstringWithoutRepeat(s));
+//        System.out.println(longestSubstringWithoutRepeat(s));
+        System.out.println(longestSubstringWithoutRepeat_Optimised(s));
     }
 }
