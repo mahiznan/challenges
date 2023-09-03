@@ -63,7 +63,6 @@ public class TwoSum {
         return null;
     }
 
-
     public static void main(String[] args) {
 //        int[] A = {1, 3, 4, 6};
 //        int target = 7;
