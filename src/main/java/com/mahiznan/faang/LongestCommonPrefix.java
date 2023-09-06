@@ -1,5 +1,7 @@
 package com.mahiznan.faang;
 
+import java.util.Arrays;
+
 /*
 Longest Common Prefix
 Easy
@@ -45,7 +47,21 @@ Constraints
  */
 public class LongestCommonPrefix {
 
-    static String longestCommonPrefix(String[] str) {
+    static String longestCommonPrefix_Best(String[] str) {
+        Arrays.sort(str);
+        int n = str.length - 1;
+        String lcp = "";
+        for (int i = 0; i < Math.min(str[0].length(), str[n].length()); i++) {
+            if (str[0].charAt(i) == str[n].charAt(i)) {
+                lcp += str[0].charAt(i);
+            } else {
+                break;
+            }
+        }
+        return lcp;
+    }
+
+    static String longestCommonPrefix_Good(String[] str) {
         StringBuilder res = new StringBuilder();
         String s = str[0];
         for (int i = 0; i < s.length(); i++) {
@@ -61,8 +77,10 @@ public class LongestCommonPrefix {
 
     public static void main(String[] args) {
 //        String[] str = {"apple", "apply", "apollo", "abracadabra"};
-        String[] str = {"qwerty", " hello"};
-//        String[] str = {"helloworld", "hello", "hell"};
-        System.out.println(longestCommonPrefix(str));
+//        String[] str = {"qwerty", " hello"};
+        String[] str = {"helloworld", "hello", "hell"};
+
+        System.out.println(longestCommonPrefix_Good(str));
+        System.out.println(longestCommonPrefix_Best(str));
     }
 }
