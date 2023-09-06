@@ -87,7 +87,6 @@ public class LongestPalindromicSubstring {
         return longestPalindrome;
     }
 
-
     static boolean isPalindrome(String str) {
         int l = str.length();
         for (int i = 0, j = str.length() - 1; i < j; i++, j--) {
@@ -132,6 +131,7 @@ public class LongestPalindromicSubstring {
         return s.substring(i, j + 1);
     }
 
+
     static String longestPalindrome_Good(String s) {
         String lps = "";
         for (int i = 0; i < s.length(); i++) {
@@ -139,11 +139,17 @@ public class LongestPalindromicSubstring {
                 String subString = s.substring(i, j);
                 if (isPalindrome(subString) && subString.length() > lps.length()) {
                     lps = subString;
+                    System.out.println("Current Palindrome " + lps);
                 }
             }
         }
         return lps;
     }
+
+
+
+
+
 
     public static void main(String[] args) {
         String str = "abcdcab";
@@ -152,8 +158,11 @@ public class LongestPalindromicSubstring {
         str = "babad";
         str = "cbbd";
         str = "abaadcd";
+        str = "ababa";
         System.out.println(longestPalindrome_Good(str));
         System.out.println(longestPalindrome_Better(str));
         System.out.println(longestPalindrome_Best(str));
     }
+
+
 }
