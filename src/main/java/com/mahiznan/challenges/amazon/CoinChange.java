@@ -24,17 +24,17 @@ public class CoinChange {
             return 0;
         if (sum < 0)
             return 0;
-        return countWaysRecursive(coins, n - 1, sum) + countWaysRecursive(coins, n, sum - coins[n - 1]);
+        return countWaysRecursive(coins, n - 1, sum)
+                + countWaysRecursive(coins, n, sum - coins[n - 1]);
     }
-
-
+    
     public static void main(String[] args) {
-        int[] coins = {2, 5, 3, 6};
-        int sum = 10;
+        int[] coins = {1, 2, 3};
+        int sum = 5;
 //        int[] coins = {1, 2, 3};
 //        int sum = 4;
-//        System.out.println(countWaysRecursive(coins, coins.length, sum));
-        System.out.println(countWaysDP(coins, sum));
+        System.out.println(countWaysRecursive(coins, coins.length, sum));
+//        System.out.println(countWaysDP(coins, sum));
     }
 
     private static int countWaysDP(int[] coins, int sum) {
