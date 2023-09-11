@@ -50,9 +50,11 @@ public class BalancedParentheses {
             if (str.charAt(i) == '{' || str.charAt(i) == '[' || str.charAt(i) == '(') {
                 stack.push(str.charAt(i));
             } else {
-                if (stack.isEmpty() || (str.charAt(i) == '}' && stack.peek() != '{') || (str.charAt(i) == ']' && stack.peek() != '[') || (str.charAt(i) == ')' && stack.peek() != '('))
+                if (stack.isEmpty()
+                        || (str.charAt(i) == '}' && stack.pop() != '{')
+                        || (str.charAt(i) == ']' && stack.pop() != '[')
+                        || (str.charAt(i) == ')' && stack.pop() != '('))
                     return false;
-                stack.pop();
             }
 
         }
@@ -62,6 +64,8 @@ public class BalancedParentheses {
     public static void main(String[] args) {
         String s = "({})[]";
         s = "{()})(";
+        s = "()";
+        s = "()[]{}";
         System.out.println(isBalancedParentheses(s));
     }
 }
