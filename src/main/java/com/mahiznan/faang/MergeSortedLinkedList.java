@@ -56,39 +56,52 @@ public class MergeSortedLinkedList {
     }
 
     static ListNode mergeTwoSortedList(ListNode firstList, ListNode secondList) {
+        ListNode head, result;
         if (firstList == null)
             return secondList;
         if (secondList == null)
             return firstList;
-        ListNode head, pointer;
         if (firstList.data < secondList.data) {
             head = firstList;
+            if (firstList.next == null) {
+                head.next = secondList;
+                return head;
+            }
             firstList = firstList.next;
         } else {
             head = secondList;
+            if (secondList.next == null) {
+                head.next = firstList;
+                return head;
+            }
             secondList = secondList.next;
         }
-        pointer = head;
-        while (firstList != null && secondList != null) {
-            while (firstList.data < secondList.data) {
-                pointer.next = firstList;
+        result = head;
+        head.next = null;
+
+        while (true) {
+            if (firstList.data < secondList.data) {
+                head.next = firstList;
+                if (firstList.next == null) {
+                    head.next.next = secondList;
+                    return result;
+                }
                 firstList = firstList.next;
-                pointer = pointer.next;
-            }
-            while (secondList.data < firstList.data) {
-                pointer.next = secondList;
+            } else {
+                head.next = secondList;
+                if (secondList.next == null) {
+                    head.next.next = firstList;
+                    return result;
+                }
                 secondList = secondList.next;
-                pointer = pointer.next;
             }
+            head.next.next = null;
+            head = head.next;
         }
-        if (firstList == null)
-            pointer.next = secondList;
-        else
-            pointer.next = firstList;
-        return head;
     }
 
     static void print(ListNode node) {
+        System.out.println();
         while (node != null) {
             if (node.next != null)
                 System.out.print(node.data + "->");
@@ -99,23 +112,27 @@ public class MergeSortedLinkedList {
     }
 
     public static void main(String[] args) {
+        /*
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
-        ListNode node3 = new ListNode(3);
-        ListNode node4 = new ListNode(2);
-        ListNode node5 = new ListNode(2);
+        ListNode node3 = new ListNode(4);
+
+        ListNode node4 = new ListNode(1);
+        ListNode node5 = new ListNode(3);
         ListNode node6 = new ListNode(4);
-        ListNode node7 = new ListNode(5);
 
         node1.next = node2;
         node2.next = node3;
         node3.next = null;
         node4.next = node5;
         node5.next = node6;
-        node6.next = node7;
-        node7.next = null;
+        node6.next = null;*/
+        ListNode node1 = new ListNode(2);
+        node1.next = null;
+        ListNode node2 = new ListNode(1);
+        node2.next = null;
 
-        ListNode mergedList = mergeTwoSortedList(node1, node4);
+        ListNode mergedList = mergeTwoSortedList(node1, node2);
         print(mergedList);
 
     }
