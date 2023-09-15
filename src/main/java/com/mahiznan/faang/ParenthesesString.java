@@ -58,17 +58,6 @@ public class ParenthesesString {
         return formParentheses(0, 0, n * 2, "", new ArrayList<>());
     }
 
-    /*
-
-    1. Tech Solution
-
-    2.
-
-     */
-
-
-
-
     static List<String> formParentheses(int openingCount, int closingCount, int n, String str, List<String> res) {
         if (n == 0 && openingCount == closingCount) {
             res.add(str);
