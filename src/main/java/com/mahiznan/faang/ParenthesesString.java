@@ -59,8 +59,12 @@ public class ParenthesesString {
     }
 
     static List<String> formParentheses(int openingCount, int closingCount, int n, String str, List<String> res) {
-        if (n == 0 && openingCount == closingCount) {
-            res.add(str);
+        if(closingCount > openingCount)
+            return res;
+        if (n == 0) {
+            if (openingCount == closingCount) {
+                res.add(str);
+            }
             return res;
         }
         formParentheses(openingCount + 1, closingCount, n - 1, str + "(", res);
@@ -69,7 +73,7 @@ public class ParenthesesString {
     }
 
     public static void main(String[] args) {
-        int n = 2;
+        int n = 3;
         List<String> result = generateParentheses(n);
         System.out.println(result);
     }
