@@ -1,7 +1,9 @@
 package com.mahiznan.faang;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /*
 Generate Parentheses
@@ -53,13 +55,39 @@ Constraint
  */
 public class ParenthesesString {
 
-    static List<String> generateParentheses(int n) {
 
+    static List<String> generateParentheses_Better(int n) {
+        List<String> res = new ArrayList<>();
+        dfs(n, n, new StringBuilder(), res);
+        return res;
+    }
+
+    static void dfs(int l, int r, final StringBuilder s, List<String> res) {
+
+        if (l == 0 && r == 0) {
+            res.add(s.toString());
+            return;
+        }
+
+        if (l > 0) {
+            s.append("(");
+            dfs(l - 1, r, s, res);
+            s.deleteCharAt(s.length() - 1);
+        }
+        if (l < r) {
+            s.append(")");
+            dfs(l, r - 1, s, res);
+            s.deleteCharAt(s.length() - 1);
+        }
+
+    }
+
+    static List<String> generateParentheses_Good(int n) {
         return formParentheses(0, 0, n * 2, "", new ArrayList<>());
     }
 
     static List<String> formParentheses(int openingCount, int closingCount, int n, String str, List<String> res) {
-        if(closingCount > openingCount)
+        if (closingCount > openingCount)
             return res;
         if (n == 0) {
             if (openingCount == closingCount) {
@@ -72,9 +100,11 @@ public class ParenthesesString {
         return res;
     }
 
+
     public static void main(String[] args) {
         int n = 3;
-        List<String> result = generateParentheses(n);
+//        List<String> result = generateParentheses_Good(n);
+        List<String> result = generateParentheses_Better(n);
         System.out.println(result);
     }
 }
