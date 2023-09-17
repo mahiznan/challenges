@@ -64,9 +64,26 @@ public class SearchRotatedSortedArray {
     }
 
     static int getElementIndex_Best(int[] array, int target) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == target)
-                return i;
+        int low = 0, high = array.length - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (array[mid] == target)
+                return mid;
+
+            if (array[low] <= array[mid]) {
+                if (array[low] <= target && target < array[mid]) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else {
+                if (array[mid] < target && target <= array[high]) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
         }
         return -1;
     }
@@ -75,6 +92,7 @@ public class SearchRotatedSortedArray {
     public static void main(String[] args) {
         int[] array = {4, 5, 6, 7, 1, 2, 3};
         int target = 6;
-        System.out.println(getElementIndex_good(array, target));
+//        System.out.println(getElementIndex_good(array, target));
+        System.out.println(getElementIndex_Best(array, target));
     }
 }
