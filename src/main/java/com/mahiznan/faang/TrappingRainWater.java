@@ -1,5 +1,7 @@
 package com.mahiznan.faang;
 
+import java.util.Stack;
+
 /*
 Given an array A where each element denotes a the height of blocks, calculate the total volume of water that can be trapped when it rains.
 
@@ -39,7 +41,42 @@ Constraints
 0 <= Ai <= 104
  */
 public class TrappingRainWater {
-    static int volumeOfTrappedRainWater(int[] heights) {
+
+    static int volumeOfTrappedRainWater_Good(int[] heights) {
+        int n = heights.length;
+        int totalRainWater = 0;
+        for (int i = 0; i < n; i++) {
+            int maxLeft = 0, maxRight = 0;
+            for (int j = 0; j <= i; j++) {
+                maxLeft = Math.max(maxLeft, heights[j]);
+            }
+            for (int j = i; j < n; j++) {
+                maxRight = Math.max(maxRight, heights[j]);
+            }
+            totalRainWater += Math.min(maxRight, maxLeft) - heights[i];
+        }
+        return totalRainWater;
+    }
+
+    static int volumeOfTrappedRainWater_Best1(int[] heights) {
+        int n = heights.length;
+        int totalRainWater = 0;
+        Stack<Integer> index = new Stack<>();
+        for (int i = 0; i < n; i++) {
+            while (!index.isEmpty() && heights[index.peek()] < heights[i]) {
+                int prevIndx = index.peek();
+                index.pop();
+                if (!index.isEmpty()) {
+                    int height = Math.min(heights[i], heights[index.peek()]) - heights[prevIndx];
+                    totalRainWater += height * (i - 1 - index.peek());
+                }
+            }
+            index.push(i);
+        }
+        return totalRainWater;
+    }
+
+    static int volumeOfTrappedRainWater_Best2(int[] heights) {
         int left = 0, right = heights.length - 1;
         int leftMax = heights[left];
         int rightMax = heights[right];
@@ -71,6 +108,8 @@ public class TrappingRainWater {
 
     public static void main(String[] args) {
         int[] heights = {1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        System.out.println(volumeOfTrappedRainWater(heights));
+        System.out.println(volumeOfTrappedRainWater_Good(heights));
+        System.out.println(volumeOfTrappedRainWater_Best1(heights));
+        System.out.println(volumeOfTrappedRainWater_Best2(heights));
     }
 }
