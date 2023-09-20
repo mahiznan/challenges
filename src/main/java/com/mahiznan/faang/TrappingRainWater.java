@@ -39,29 +39,38 @@ Constraints
 0 <= Ai <= 104
  */
 public class TrappingRainWater {
-    int volumeOfTrappedRainWater(int[] heights) {
-        int pos = 1, capacity = 0;
-        while (pos < heights.length - 1) {
-            int curLeft = pos - 1, curRight = pos + 1, prevLeft, prefRight;
+    static int volumeOfTrappedRainWater(int[] heights) {
+        int left = 0, right = heights.length - 1;
+        int leftMax = heights[left];
+        int rightMax = heights[right];
+        int water = 0;
 
-            while (true) {
-                if (curLeft < 0 || heights[pos] > heights[curLeft]) {
-                    pos = curRight + 1;
-                    break;
+        while (left < right) {
+            if (heights[left] < heights[right]) {
+                left++;
+                if (leftMax < heights[left]) {
+                    leftMax = heights[left];
+                } else {
+                    water += leftMax - heights[left];
                 }
-                int currentCapacity = (heights[curRight] > heights[curLeft] ? (heights[curRight] - heights[curLeft]) : (heights[curLeft] - heights[curRight])) - heights[pos];
-                prevLeft = curLeft--;
-                prefRight = curRight++;
-            }
 
+            } else {
+                right--;
+                if (rightMax < heights[right]) {
+                    rightMax = heights[right];
+                } else {
+                    water += rightMax - heights[right];
+                }
+            }
 
         }
 
+        return water;
 
-        return capacity;
     }
 
     public static void main(String[] args) {
-        System.out.println("Ok");
+        int[] heights = {1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        System.out.println(volumeOfTrappedRainWater(heights));
     }
 }
