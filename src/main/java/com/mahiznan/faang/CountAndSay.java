@@ -1,7 +1,7 @@
 package com.mahiznan.faang;
 
 public class CountAndSay {
-
+    //Custom message to make changes
     static String countAndSay(int n) {
         StringBuilder res = new StringBuilder("1");
 
