@@ -7,6 +7,7 @@ Given a string with the just the six characters - ‘(’, ‘)’, ‘{’, ‘
 
 A string is balanced if all brackets exist in pairs and are closed in the correct order.
 
+// Edit for history
 Example:
 String: ({})[]
 
