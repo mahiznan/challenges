@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Stack;
 
 /*
+
 Generate Parentheses
-Medium
-50
+--------------------
 Given a number n denoting n pairs of parentheses, return all valid expressions using the n pairs of parentheses.
 
 Examples
