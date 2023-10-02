@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
+
 Given an array A and an integer target,
 find the indices of the two numbers in the array whose sum is equal to the given target.
 
