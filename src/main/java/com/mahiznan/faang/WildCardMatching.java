@@ -157,6 +157,36 @@ public class WildCardMatching {
         return pIndex == p.length();
     }
 
+    public static boolean isMatch_DP(String s, String p) {
+        boolean[][] dp = new boolean[p.length() + 1][s.length() + 1];
+        for (int i = dp.length - 1; i >= 0; i--) {
+            for (int j = dp[0].length - 1; j >= 0; j--) {
+                if (i == dp.length - 1 && j == dp[0].length - 1) {
+                    dp[i][j] = true;
+                } else if (i == dp.length - 1) {
+                    dp[i][j] = false;
+                } else if (j == dp[0].length - 1) {
+                    if (p.charAt(i) == '*') {
+                        dp[i][j] = dp[i + 1][j];
+                    } else {
+                        dp[i][j] = false;
+                    }
+                } else {
+                    if (p.charAt(i) == '?') {
+                        dp[i][j] = dp[i + 1][j + 1];
+                    } else if (p.charAt(i) == '*') {
+                        dp[i][j] = dp[i + 1][j] || dp[i][j + 1];
+                    } else if (p.charAt(i) == s.charAt(j)) {
+                        dp[i][j] = dp[i + 1][j + 1];
+                    } else {
+                        dp[i][j] = false;
+                    }
+                }
+            }
+        }
+        return dp[0][0];
+    }
+
     public static void main(String[] args) {
         String string = "bacd";
         String pattern = "ba*cd";
@@ -170,6 +200,7 @@ public class WildCardMatching {
         pattern = "***bba**a*bbba**aab**b";
 //        System.out.println(isMatch_Good(string, pattern));
 //        System.out.println(isMatch_Better(string, pattern));
-        System.out.println(isMatch_Best(string, pattern));
+//        System.out.println(isMatch_Best(string, pattern));
+        System.out.println(isMatch_DP(string, pattern));
     }
 }
