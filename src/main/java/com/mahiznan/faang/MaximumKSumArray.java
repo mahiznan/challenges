@@ -44,10 +44,18 @@ Constraints
  */
 public class MaximumKSumArray {
 
+    //{3, 5, 6, 2, 4, 7, 8}
     static int maxKSubarraySum(int[] A, int k) {
-        int maxSum = 0;
-
-        return maxSum;
+        int max = 0, curMax = 0;
+        for (int i = 0; i < k; i++)
+            max += A[i];
+        curMax = max;
+        for (int i = k; i < A.length; i++) {
+            curMax = curMax - A[i - k] + A[i];
+            if (curMax > max)
+                max = curMax;
+        }
+        return max;
     }
 
     public static void main(String[] args) {
