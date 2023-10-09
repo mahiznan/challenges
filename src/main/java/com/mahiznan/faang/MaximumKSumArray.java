@@ -59,7 +59,9 @@ public class MaximumKSumArray {
     }
 
     public static void main(String[] args) {
-        int[] arr = {3, 5, 6, 2, 4, 7, 8};
+//        int[] arr = {3, 5, 6, 2, 4, 7, 8};
+//        int k = 3;
+        int[] arr = {1, 5, 4, 2, 9, 9, 9};
         int k = 3;
         System.out.println(maxKSubarraySum(arr, k));
     }
