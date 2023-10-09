@@ -36,11 +36,11 @@ Expected Output
 Constraints
 1 <= T <= 100
 
-1 <= n <= 104
+1 <= n <= 10^4
 
 1 <= k <= n
 
-1 <= Ai <= 104
+1 <= Ai <= 10^4
  */
 public class MaximumKSumArray {
 
