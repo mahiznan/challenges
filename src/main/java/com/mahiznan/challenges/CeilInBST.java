@@ -43,7 +43,8 @@ public class CeilInBST {
 //        int key = 3;
 //        String tree = "10 5 11 4 7 N N N N N 8";
 //        int key = 6;
-        String tree = "7 1 9 N 4 8 10";
+//        String tree = "7 1 9 N 4 8 10";
+        String tree = "1 N 1 N 1 N 3";
         int key = 2;
         Node root = Util.buildBinaryTree(tree);
         System.out.println(findCeil(root, key));
