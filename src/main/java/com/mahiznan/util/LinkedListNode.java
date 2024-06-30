@@ -8,5 +8,4 @@ public class LinkedListNode {
         data = x;
         next = null;
     }
-
 }
