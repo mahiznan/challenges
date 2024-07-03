@@ -105,4 +105,29 @@ public class RemoveDuplicateFromLinkedList {
         }
         return headNode;
     }
+
+    public static Node removeAllDuplicatesOption2(Node head) {
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Node dummy = new Node(0); // Dummy node to handle edge cases
+        dummy.next = head;
+        Node prevNode = dummy;
+        Node currNode = head;
+        while (currNode != null) {
+            boolean isDuplicate = false;
+            while (currNode.next != null && currNode.data == currNode.next.data) {
+                currNode = currNode.next;
+                isDuplicate = true;
+            }
+            if (isDuplicate) {
+                prevNode.next = currNode.next;
+            } else {
+                prevNode = currNode;
+            }
+            currNode = currNode.next;
+        }
+        return dummy.next;
+    }
 }
