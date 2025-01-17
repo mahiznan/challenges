@@ -1,5 +1,7 @@
 package com.mahiznan.faang;
 
+import java.util.Arrays;
+
 /*
 Given a matrix, rotate the matrix 90 degrees clockwise.
 
@@ -64,19 +66,33 @@ Constraints
 public class MatrixRotation {
 
     int[][] rotateMatrix(int[][] matrix) {
-        int[][] rotatedMatrix = new int[matrix[0].length][matrix.length];
-
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-//                rotatedMatrix[]
-            }
-
+        if (matrix == null || matrix.length == 0) {
+            throw new IllegalArgumentException("Matrix must be non-empty.");
         }
 
-        return matrix;
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // Create a new matrix to hold the rotated result
+        int[][] rotatedMatrix = new int[cols][rows];
+
+        // Fill the rotated matrix
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                rotatedMatrix[j][rows - 1 - i] = matrix[i][j];
+            }
+        }
+
+        return rotatedMatrix;
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello");
+//        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+//        int[][] matrix = {{1, 2}, {3, 4}, {5, 6}};
+//        int[][] matrix = {{1}, {2}, {3}};
+//        int[][] matrix = {{1}};
+        int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        MatrixRotation matrixRotation = new MatrixRotation();
+        System.out.println(Arrays.deepToString(matrixRotation.rotateMatrix(matrix)));
     }
 }
