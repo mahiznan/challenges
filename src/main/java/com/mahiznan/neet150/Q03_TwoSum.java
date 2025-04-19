@@ -1,7 +1,9 @@
 package com.mahiznan.neet150;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 /*
 Two Sum
 Solved
@@ -38,7 +40,7 @@ public class Q03_TwoSum {
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4, 5};
-        System.out.println(twoSum(nums, 5));
+        System.out.println(Arrays.toString(twoSum(nums, 5)));
     }
 
     public static int[] twoSum(int[] nums, int target) {
