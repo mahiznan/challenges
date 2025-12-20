@@ -23,7 +23,6 @@ Examples
 1 2 3        0 0 0
  */
 
-
 public class RowColumnZero {
     record Position(int row, int col) {
 
