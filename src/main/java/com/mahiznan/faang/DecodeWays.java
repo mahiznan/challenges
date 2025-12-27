@@ -158,6 +158,7 @@ public class DecodeWays {
         System.out.println(decodeWays.numDecodings_DynamicProgramming(decoded));
         end = System.nanoTime();
         System.out.println("Dynamic Programming Approach Time taken (ns): " + (end - start));
-//        encoded: ["ABC", "LC", "AW"]
+//        "Encoded": "123"
+//        Decoded: ["ABC", "LC", "AW"]
     }
 }
