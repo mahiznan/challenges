@@ -37,6 +37,8 @@ Expected Output
  */
 
 
+import java.util.ArrayList;
+
 public class SymmetricBinaryTree {
 
     static class Node {
@@ -49,20 +51,34 @@ public class SymmetricBinaryTree {
         }
     }
 
+    boolean checkSymmetric(Node left, Node right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null || left.data != right.data) {
+            return false;
+        }
+        return checkSymmetric(left.left, right.right) && checkSymmetric(left.right, right.left);
+    }
+
     boolean isSymmetric(Node root) {
-        return false;
+        if (root == null) {
+            return true;
+        }
+        return checkSymmetric(root.left, root.right);
     }
 
     public static void main(String[] args) {
-        //1 2 2 4 -1 -1 4
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(2);
-        root.left.left = new Node(4);
+        root.left.left = new Node(2);
         root.left.right = null;
-        root.right.left = null;
-        root.right.right = new Node(4);
+        root.right.left = new Node(2);
+        root.right.right = null;
         SymmetricBinaryTree symmetricBinaryTree = new SymmetricBinaryTree();
         System.out.println(symmetricBinaryTree.isSymmetric(root));
+
     }
 }
