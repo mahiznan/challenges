@@ -50,15 +50,28 @@ public class BalancedBinaryTree {
     }
 
 
+    int checkHeight(Node node) {
+        if (node == null) return 0;
+        int left = checkHeight(node.left);
+        if (left == -1) return -1;
+        int right = checkHeight(node.right);
+        if (right == -1) return -1;
+        if (Math.abs(left - right) > 1) return -1;
+        return Math.max(left, right) + 1;
+    }
+
 
     boolean isBinaryTreeBalanced(Node root) {
-        if (root == null) return true;
-        return false;
+        return checkHeight(root) != -1;
     }
 
     public static void main(String[] args) {
         BalancedBinaryTree tree = new BalancedBinaryTree();
         Node root = new Node(1);
+        root.left = new Node(2);
+        root.left.left = new Node(4);
+        root.left.left.left = new Node(5);
+        root.right = new Node(3);
         System.out.println(tree.isBinaryTreeBalanced(root));
     }
 }
