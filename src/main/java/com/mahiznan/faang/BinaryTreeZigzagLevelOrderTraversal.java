@@ -15,16 +15,38 @@ public class BinaryTreeZigzagLevelOrderTraversal {
     }
 
     int[] zigzagLevelOrderTraversal(Node root) {
-
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            if (node.left != null) queue.add(node.left);
-            if (node.right != null) queue.add(node.right);
-            System.out.print(node.data + " ");
+        ArrayList<Integer> list = new ArrayList<>();
+        Stack<Node> forwardStack = new Stack<>();
+        Stack<Node> reverseStack = new Stack<>();
+        forwardStack.add(root);
+        list.add(root.data);
+        while (!forwardStack.isEmpty()) {
+            while (!forwardStack.isEmpty()) {
+                Node node = forwardStack.pop();
+                if (node.right != null) {
+                    reverseStack.add(node.right);
+                    list.add(node.right.data);
+                }
+                if (node.left != null) {
+                    reverseStack.add(node.left);
+                    list.add(node.left.data);
+                }
+            }
+            while (!reverseStack.isEmpty()) {
+                Node node = reverseStack.pop();
+                if (node.left != null) {
+                    forwardStack.add(node.left);
+                    list.add(node.left.data);
+                }
+                if (node.right != null) {
+                    forwardStack.add(node.right);
+                    list.add(node.right.data);
+                }
+            }
         }
-        return null;
+        return list.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
     public static void main(String[] args) {
@@ -44,7 +66,7 @@ public class BinaryTreeZigzagLevelOrderTraversal {
         three.left = six;
         six.left = eight;
         five.left = seven;
-        tree.zigzagLevelOrderTraversal(one);
+        System.out.println(Arrays.toString(tree.zigzagLevelOrderTraversal(one)));
     }
 
 }
