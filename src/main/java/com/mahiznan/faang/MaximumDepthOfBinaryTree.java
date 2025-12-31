@@ -52,20 +52,16 @@ public class MaximumDepthOfBinaryTree {
         }
     }
 
-    int depth(Node root) {
-        if (root == null) return 0;
-
-    }
-
     int getMaxDepth(Node root) {
-        return 0;
+        if (root == null) return 0;
+        return Math.max(getMaxDepth(root.left), getMaxDepth(root.right)) + 1;
     }
 
     public static void main(String[] args) {
         MaximumDepthOfBinaryTree maxDepth = new MaximumDepthOfBinaryTree();
         Node root = new Node(1);
         root.left = new Node(2);
-        root.right = new Node(3);
+        root.left.right = new Node(3);
         System.out.println(maxDepth.getMaxDepth(root));
     }
 }
