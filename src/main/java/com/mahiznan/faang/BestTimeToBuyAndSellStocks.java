@@ -46,10 +46,33 @@ Constraints
 public class BestTimeToBuyAndSellStocks {
 
     int maxProfit(int[] prices) {
-        return 0;
+        int maxProfit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            int buyPrice = prices[i];
+            for (int j = i + 1; j < prices.length; j++) {
+                int profit = prices[j] - buyPrice;
+                if (profit > maxProfit) {
+                    maxProfit = profit;
+                }
+            }
+        }
+        return maxProfit;
+    }
+
+
+    int maxProfitOptimal(int[] prices) {
+        int profit = 0, minPrice = Integer.MAX_VALUE;
+        for (int price : prices) {
+            minPrice = Math.min(minPrice, price);
+            profit = Math.max(profit, price - minPrice);
+        }
+        return profit;
     }
 
     public static void main(String[] args) {
-
+        BestTimeToBuyAndSellStocks solution = new BestTimeToBuyAndSellStocks();
+        System.out.println(solution.maxProfit(new int[]{1, 2, 3, 4, 5}));
+        System.out.println(solution.maxProfit(new int[]{6, 1, 4, 2, 5, 13}));
+        System.out.println(solution.maxProfit(new int[]{5, 4, 3, 2, 1}));
     }
 }
