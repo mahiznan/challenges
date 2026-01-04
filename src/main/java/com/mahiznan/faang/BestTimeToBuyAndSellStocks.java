@@ -72,7 +72,7 @@ public class BestTimeToBuyAndSellStocks {
     public static void main(String[] args) {
         BestTimeToBuyAndSellStocks solution = new BestTimeToBuyAndSellStocks();
         System.out.println(solution.maxProfit(new int[]{1, 2, 3, 4, 5}));
-        System.out.println(solution.maxProfit(new int[]{6, 1, 4, 2, 5, 13}));
+        System.out.println(solution.maxProfitOptimal(new int[]{6, 1, 4, 2, 5, 13}));
         System.out.println(solution.maxProfit(new int[]{5, 4, 3, 2, 1}));
     }
 }
