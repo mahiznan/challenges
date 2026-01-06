@@ -51,13 +51,23 @@ Constraints
 
 
  */
+
+// 9,1,4,2,5,3
 public class BestTimeToBuyAndSellStocks2 {
     int maxProfit(int[] prices) {
-        return 0;
+        int maxProfit = 0;
+        int start = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > start)
+                maxProfit += prices[i] - start;
+            start = prices[i];
+        }
+        return maxProfit;
     }
 
     public static void main(String[] args) {
         BestTimeToBuyAndSellStocks2 s = new BestTimeToBuyAndSellStocks2();
-        System.out.println(s.maxProfit(new int[]{6, 1, 4, 2, 5, 3}));
+//        System.out.println(s.maxProfit(new int[]{9, 1, 4, 2, 5, 3}));
+        System.out.println(s.maxProfit(new int[]{1, 50, 100}));
     }
 }
