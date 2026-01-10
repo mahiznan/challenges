@@ -1,4 +1,5 @@
 package com.mahiznan.faang;
+
 /*
 A path between two nodes p and q is defined as a sequence of nodes encountered while travelling from node p to node q (or vice-versa) via parent-child connections. The path does not need to pass through the root node. The sum of the values of all these nodes in the path is considered as the path sum.
 
@@ -40,4 +41,33 @@ Expected Output
 -1000 <= node value <= 1000
  */
 public class MaximumPathSumOfBinaryTree {
+
+    static class Node {
+        public Node left;
+        public Node right;
+        public int data;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    int maxPathSum(Node root) {
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        MaximumPathSumOfBinaryTree solution = new MaximumPathSumOfBinaryTree();
+        Node one = new Node(1);
+        Node two = new Node(2);
+        Node four = new Node(4);
+        Node five = new Node(5);
+        Node six = new Node(6);
+        one.left = two;
+        two.left = four;
+        four.left = five;
+        four.right = six;
+        System.out.println(solution.maxPathSum(one));
+
+    }
 }
