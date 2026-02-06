@@ -1,5 +1,7 @@
 package com.mahiznan.challenges.java.core;
 
+import org.w3c.dom.ls.LSOutput;
+
 class Config {
 
     static {
