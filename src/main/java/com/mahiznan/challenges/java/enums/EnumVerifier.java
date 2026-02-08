@@ -27,7 +27,6 @@ enum WorkDay {
     }
 }
 
-
 public class EnumVerifier {
     static void main() {
         WorkDay day = WorkDay.FRIDAY;
