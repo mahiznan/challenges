@@ -15,17 +15,17 @@ import java.util.*;
 public class ConcurrencyDemo {
 
     public static void main(String[] args) throws InterruptedException {
+
         System.out.println("=================================================");
         System.out.println("  JAVA CONCURRENCY — synchronized vs ReentrantLock");
         System.out.println("=================================================\n");
 
-
-        // Comment/uncomment to run specific demos
+//         Comment/uncomment to run specific demos
         demo1_NotInterruptible();
-//        demo2_NoTimeout();
-//        demo3_Starvation();
-//        demo4_SpuriousWakeup();
-//        demo5_NoIntrospection();
+        demo2_NoTimeout();
+        demo3_Starvation();
+        demo4_SpuriousWakeup();
+        demo5_NoIntrospection();
 
 
     }
@@ -133,9 +133,6 @@ public class ConcurrencyDemo {
         System.out.println("─────────────────────────────────────────────────");
         System.out.println("DEMO 2:synchronized has NO timeout —tryLock saves you ");
         System.out.println("─────────────────────────────────────────────────");
-
-
-        // Simulate a lock held for a long time
         ReentrantLock lock = new ReentrantLock();
 
         Thread longRunningThread = new Thread(() -> {
@@ -143,7 +140,7 @@ public class ConcurrencyDemo {
             System.out.println("[Long Runner] Holding lock for 3 seconds...");
             try {
                 Thread.sleep(3000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             } finally {
                 lock.unlock();
             }
@@ -182,92 +179,99 @@ public class ConcurrencyDemo {
 
     // =========================================================================
     // DEMO 3: synchronized CAUSES STARVATION
-    // Problem: JVM picks arbitrary thread — some threads never get the lock
+    // Problem: JVM picks arbitrary thread — waiting threads can be passed over (barging)
     // =========================================================================
     static void demo3_Starvation() throws InterruptedException {
         System.out.println("─────────────────────────────────────────────────");
         System.out.println("DEMO 3:Starvation —unfair vs fair lock ");
         System.out.println("─────────────────────────────────────────────────");
 
-                /*
         int threadCount = 5;
         int iterations = 10;
 
-        // UNFAIR lock (default) — like synchronized behaviour
+        // UNFAIR lock (default) — like synchronized behavior
         System.out.println("--- UNFAIR ReentrantLock (simulates synchronized behaviour) ---");
-        ReentrantLock unfairLock = new ReentrantLock(false); // unfair
-        int[] unfairCounts = runLockContention(unfairLock, threadCount, iterations);
-        System.out.println("Lock acquisitions per thread (unfair):");
-        for (int i = 0; i < threadCount; i++) {
-            System.out.printf("  Thread-%d: %d times%n", i, unfairCounts[i]);
-        }
-        System.out.println("Notice: distribution is UNEVEN — some threads starved");
+        List<Integer> unfairOrder = runLockContention(new ReentrantLock(false), threadCount, iterations);
+        printOrder(unfairOrder, threadCount);
+        System.out.println("Notice: threads run in long streaks (barging) — a thread that just released");
+        System.out.println("        the lock re-grabs it while waiting threads are delayed");
 
         Thread.sleep(500);
 
         // FAIR lock — threads get lock in arrival order
         System.out.println("\n--- FAIR ReentrantLock ---");
-        ReentrantLock fairLock = new ReentrantLock(true); // fair
-        int[] fairCounts = runLockContention(fairLock, threadCount, iterations);
-        System.out.println("Lock acquisitions per thread (fair):");
-        for (int i = 0; i < threadCount; i++) {
-            System.out.printf("  Thread-%d: %d times%n", i, fairCounts[i]);
-        }
-        System.out.println("Notice: distribution is EVEN — no starvation");
+        List<Integer> fairOrder = runLockContention(new ReentrantLock(true), threadCount, iterations);
+        printOrder(fairOrder, threadCount);
+        System.out.println("Notice: threads take turns in arrival order (round-robin) — no barging");
 
         System.out.println("\n✓ DEMO 3 COMPLETE\n");
-  */
-
     }
 
-    static int[] runLockContention(ReentrantLock lock, int threadCount, int iterations)
+    // Prints the order in which threads acquired the lock, plus per-thread totals and longest streak
+    static void printOrder(List<Integer> order, int threadCount) {
+        StringBuilder sb = new StringBuilder("Acquisition order: ");
+        int[] totals = new int[threadCount];
+        int longest = 0, streak = 0, prev = -1;
+        for (int id : order) {
+            sb.append(id).append(' ');
+            totals[id]++;
+            streak = (id == prev) ? streak + 1 : 1;
+            longest = Math.max(longest, streak);
+            prev = id;
+        }
+        System.out.println(sb);
+        for (int i = 0; i < threadCount; i++) {
+            System.out.printf("  Thread-%d: %d times%n", i, totals[i]);
+        }
+        System.out.println("Longest streak by one thread: " + longest + " (1 = perfectly alternating)");
+    }
+
+    // Returns the order (thread ids) in which the lock was acquired
+    static List<Integer> runLockContention(ReentrantLock lock, int threadCount, int iterations)
             throws InterruptedException {
-        int[] counts = new int[threadCount];
         CountDownLatch latch = new CountDownLatch(threadCount);
         Thread[] threads = new Thread[threadCount];
-
+        List<Integer> order = new ArrayList<>(threadCount * iterations); // guarded by 'lock'
 
         for (int i = 0; i < threadCount; i++) {
             final int id = i;
             threads[i] = new Thread(() -> {
-                for (int j = 0; j < iterations; j++) {
-                    lock.lock();
-                    try {
-                        counts[id]++;
-                        // Simulate tiny work
+                try {
+                    for (int j = 0; j < iterations; j++) {
+                        lock.lock();
                         try {
-                            Thread.sleep(1);
+                            order.add(id);
+                            Thread.sleep(1); // simulate tiny work
                         } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        } finally {
+                            lock.unlock();
                         }
-                    } finally {
-                        lock.unlock();
                     }
+                } finally {
+                    latch.countDown();
                 }
-                latch.countDown();
             }, "Thread-" + i);
         }
 
         for (Thread t : threads) t.start();
         latch.await();
-        return counts;
-
-
+        return order;
     }
 
     // =========================================================================
-    // DEMO 4: Object.wait/notify IS BROKEN — spurious wakeups + one wait set
+    // DEMO 4: Object.wait/notify IS BROKEN — spurious wake-ups + one wait set
     // Problem: notifyAll wakes ALL threads including irrelevant ones
-    // Solution: Multiple Condition variables — precise signalling
+    // Solution: Multiple Condition variables — precise signaling
     // =========================================================================
     static void demo4_SpuriousWakeup() throws InterruptedException {
         System.out.println("─────────────────────────────────────────────────");
         System.out.println("DEMO 4:Multiple Conditions —precise producer/consumer ");
         System.out.println("─────────────────────────────────────────────────");
 
-                /*
-        int BUFFER_SIZE = 3;
+        int BUFFER_SIZE = 100;
         Queue<Integer> buffer = new LinkedList<>();
-        ReentrantLock lock = new ReentrantLock();
+        ReentrantLock lock = new ReentrantLock(true);
         Condition notFull = lock.newCondition(); // producers wait here
         Condition notEmpty = lock.newCondition(); // consumers wait here
 
@@ -319,7 +323,6 @@ public class ConcurrencyDemo {
         consumer.join();
 
         System.out.println("\n✓ DEMO 4 COMPLETE — Producer woke ONLY consumers. Consumer woke ONLY producers.\n");
-*/
 
     }
 
@@ -333,8 +336,7 @@ public class ConcurrencyDemo {
         System.out.println("DEMO 5:Lock introspection —monitoring in production ");
         System.out.println("─────────────────────────────────────────────────");
 
-                /*
-                ReentrantLock lock = new ReentrantLock();
+        ReentrantLock lock = new ReentrantLock();
         CountDownLatch holdingLatch = new CountDownLatch(1);
         CountDownLatch releaseLatch = new CountDownLatch(1);
 
@@ -413,7 +415,6 @@ public class ConcurrencyDemo {
         System.out.println("=================================================");
         System.out.println("  ALL DEMOS COMPLETE");
         System.out.println("=================================================");
-  */
 
     }
 }
